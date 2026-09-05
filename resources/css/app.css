@@ -1,9 +1,104 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans:
+        "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+}
+
+:root {
+    --primary-green: #00875a; /* Warna hijau utama button & logo */
+    --light-green: #e6f4ea; /* Warna latar belakang hijau muda */
+    --dark-text: #202124; /* Warna teks utama */
+    --gray-bg: #f8f9fa; /* Warna background halaman */
+    --card-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+body {
+    background-color: var(--gray-bg);
+    color: var(--dark-text);
+    font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Navbar & Hero Section --- */
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 10%;
+    background-color: #ffffff;
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- Grid Pilih Poli Tujuan --- */
+.section-title {
+    padding: 20px 10% 0 10%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.poli-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 10px 10% 40px 10%;
+}
+
+.poli-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.poli-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow);
+    border-color: var(--primary-green);
+}
+
+.poli-card img,
+.poli-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    color: var(--primary-green);
+}
+
+/* --- Informasi Section bawah --- */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px 10%;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+}
+
+.info-item {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
 }
