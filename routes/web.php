@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 // =========================
 
 Route::get('/', function () {
-    return view('pasien.beranda');
+    return view('loket');
 });
 
 Route::get('/beranda', function () {

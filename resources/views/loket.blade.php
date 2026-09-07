@@ -4,11 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Layanan Antrean Loket</title>
-    <!-- Menggunakan Bootstrap CDN agar tampilan langsung rapi dan modern -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
+   
+    <!-- Memanggil File CSS Manual Anda di Folder Public -->
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
-        body { background-color: #f4f7f6; font-family: 'Segoe UI', sans-serif; }
-        .card-antrean { border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        body { 
+            background-color: #f4f7f6; 
+            font-family: 'Inter', sans-serif;
+            color: #202124;
+        }
+        /* Membuat kotak/card antrean menjadi putih bersih dan elegan */
+        .card-antrean { 
+            background-color: #ffffff;
+            border-radius: 16px; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+            margin-top: 20px;
+        }
+        /* Mengubah tombol bawaan menjadi hijau modern khas fasilitas kesehatan */
+        .btn-success {
+            background-color: #00875a !important;
+            color: white !important;
+            border: none !important;
+            padding: 16px 24px !important;
+            border-radius: 12px !important;
+            font-weight: bold !important;
+            font-size: 1.1rem !important;
+            cursor: pointer;
+            width: 100%;
+            display: block;
+            transition: background-color 0.2s;
+        }
+        .btn-success:hover {
+            background-color: #006644 !important;
+        }
     </style>
 </head>
 <body>
