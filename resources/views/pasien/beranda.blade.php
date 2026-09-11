@@ -322,40 +322,122 @@ body {
 }
 
 /* Grid Rincian Box di Struk */
+/* Container Utama Grid Atas (2 Kolom) */
 .ticket-meta-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 12px;
     margin-bottom: 16px;
+    width: 100%;
 }
 
+/* Container Utama Grid Bawah (Spesial Lebar Penuh & Menonjol) */
+.ticket-meta-grid2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Base Style untuk Kotak Informasi */
 .meta-box {
     background-color: #f8fafc;
-    border-radius: 16px;
-    padding: 16px;
+    border-radius: 12px;
+    padding: 14px;
     text-align: left;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
 }
 
+/* ✨ Desain Khusus untuk Kotak Antrean Saat Ini (Grid2) */
+.ticket-meta-grid2 .meta-box {
+    background-color: #f0fdf4; /* Latar belakang hijau sangat muda */
+    border: 2px dashed #22c55e; /* Border putus-putus hijau */
+    padding: 20px; /* Lebih luas */
+    justify-content: center; /* Konten di dalam kotak otomatis rata tengah */
+    text-align: center;
+}
+
+/* Pengaturan Ikon */
 .meta-icon { 
-    font-size: 1.6rem; 
+    font-size: 1.5rem; 
+    display: flex;
+    align-items: center;
 }
 
+/* Label Teks Kecil */
 .meta-label { 
     font-size: 0.75rem; 
     color: #64748b; 
     font-weight: 600;
     display: block; 
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
+/* Nilai Teks Utama */
 .meta-value { 
     font-size: 0.95rem; 
     font-weight: 700; 
     color: #0f172a; 
+}
+
+/* ✨ Efek Spesial Huruf Kapital Besar Hijau di Grid2 */
+.ticket-meta-grid2 .meta-label {
+    color: #15803d; /* Warna label hijau gelap agar terbaca */
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.ticket-meta-grid2 .meta-value {
+    font-size: 1.75rem; /* Ukuran font dibuat jauh lebih besar */
+    color: #16a34a; /* Warna font hijau cerah */
+    text-transform: uppercase; /* Otomatis Kapital */
+    display: block;
+    margin-top: 4px;
+}
+
+/* ✨ Bonus: Desain Kotak Perhatian & Tombol bawah */
+.notice-box {
+    background-color: #fffbeb;
+    border: 1px solid #fef3c7;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.notice-text h5 {
+    color: #b45309;
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.notice-text p {
+    color: #78350f;
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.btn-status-view {
+    width: 100%;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-status-view:hover {
+    background-color: #1d4ed8;
 }
 
 /* Pewarnaan Khusus Box Estimasi Hijau */
@@ -447,6 +529,42 @@ body {
     .ticket-number {
         font-size: 3.5rem;
     }
+}
+/* Gaya Pop-up Modal Tengah */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.modal-content {
+    background: #ffffff;
+    width: 100%; max-width: 450px;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: popIn 0.3s ease;
+}
+.modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;
+}
+.modal-header h3 { margin: 0; color: #00875a; font-size: 1.15rem; }
+.close-txt { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; }
+.form-group { margin-bottom: 15px; text-align: left; }
+.form-label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 0.9rem; color: #333; }
+.form-input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; }
+.radio-group { display: flex; gap: 20px; font-size: 0.9rem; padding: 5px 0; }
+.btn-submit-modal { width: 100%; background: #00875a; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-top: 10px; }
+.btn-submit-modal:hover { background: #006644; }
+.d-none { display: none !important; }
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 </style>
@@ -559,220 +677,260 @@ body {
     </div>
 
     <!-- ==========================================
-       HALAMAN 2: CONTAINER STRUK TIKET ANTREAN PASIEN
-       ========================================== -->
-    <div id="halaman-tiket" class="container d-none">
-        <div class="ticket-wrapper">
-            <!-- Tombol Kembali Ke Beranda -->
-            <button class="btn-back" id="btn-kembali">
-                ← Kembali
-            </button>
+   HALAMAN 2: CONTAINER STRUK TIKET ANTREAN PASIEN
+   ========================================== -->
+<div id="halaman-tiket" class="container d-none">
+    <div class="ticket-wrapper">
+        <!-- Tombol Kembali Ke Beranda -->
+        <button class="btn-back" id="btn-kembali">
+            ← Kembali
+        </button>
 
-            <!-- Card Struk Tiket Utama -->
-            <div class="ticket-card">
-                <div class="ticket-logo">
-                    <div class="icon">✚</div>
-                    <span>PUSKESMAS SEJAHTERA</span>
-                </div>
-                
-                <p class="ticket-title">Nomor Antrean Anda</p>
-                <div class="ticket-number" id="txt-nomor-antrean">A-000</div>
-                <p class="ticket-thanks">Terima kasih, nomor antrean Anda telah berhasil dibuat</p>
+        <!-- Card Struk Tiket Utama -->
+        <div class="ticket-card">
+            <div class="ticket-logo">
+                <div class="icon">✚</div>
+                <span>PUSKESMAS SEJAHTERA</span>
+            </div>
+            
+            <p class="ticket-title">Nomor Antrean Anda</p>
+            <div class="ticket-number" id="txt-nomor-antrean">A-000</div>
+            <p class="ticket-thanks">Terima kasih, nomor antrean Anda telah berhasil dibuat</p>
 
-                <!-- Detail Info Box Grid -->
-                <div class="ticket-meta-grid">
-                    <div class="meta-box">
-                        <span class="meta-icon">📋</span>
-                        <div>
-                            <span class="meta-label">Poli Tujuan</span>
-                            <span class="meta-value" id="txt-poli-tujuan">Poli Umum</span>
-                        </div>
-                    </div>
-                    <div class="meta-box">
-                        <span class="meta-icon">🕒</span>
-                        <div>
-                            <span class="meta-label">Waktu Dibuat</span>
-                            <span class="meta-value" id="txt-jam-dibuat">-</span>
-                        </div>
+            <!-- ==========================================
+               TAMBAHAN: DATA IDENTITAS PASIEN
+               ========================================== -->
+            <div class="ticket-meta-grid" style="border-bottom: 1px dashed #ccc; padding-bottom: 10px; margin-bottom: 10px;">
+                <div class="meta-box">
+                    <span class="meta-icon">👤</span>
+                    <div>
+                        <span class="meta-label">Nama Pasien</span>
+                        <span class="meta-value" id="txt-nama-pasien">-</span>
                     </div>
                 </div>
-
-                <!-- Info Antrean Berjalan & Estimasi -->
-                <div class="ticket-meta-grid">
-                    <div class="meta-box">
-                        <span class="meta-icon">🩺</span>
-                        <div>
-                            <span class="meta-label">Antrean Saat Ini</span>
-                            <span class="meta-value" id="txt-antrean-sekarang">A-021</span>
-                        </div>
+                <div class="meta-box">
+                    <span class="meta-icon">💳</span>
+                    <div>
+                        <span class="meta-label">Metode Bayar</span>
+                        <span class="meta-value" id="txt-penjaminan-pasien">-</span>
                     </div>
-                    <div class="meta-box status-box">
-                        <span class="meta-icon">⏳</span>
-                        <div>
-                            <span class="meta-label-green">Estimasi Waktu Tunggu</span>
-                            <span class="meta-value-green">± 30 Menit</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Catatan Perhatian Bawah -->
-                <div class="notice-box">
-                    <div class="notice-text">
-                        <h5>Perhatian</h5>
-                        <p>Silakan menunggu hingga nomor Anda dipanggil. Terima kasih.</p>
-                    </div>
-                    <button class="btn-status-view">👁️ Lihat Status Antrean</button>
                 </div>
             </div>
+
+            <!-- Detail Info Box Grid -->
+<div class="ticket-meta-grid">
+    <div class="meta-box">
+        <span class="meta-icon">📋</span>
+        <div>
+            <span class="meta-label">Poli Tujuan</span>
+            <span class="meta-value" id="txt-poli-tujuan">Poli Umum</span>
         </div>
     </div>
+    <div class="meta-box">
+        <span class="meta-icon">🕒</span>
+        <div>
+            <span class="meta-label">Waktu Dibuat</span>
+            <span class="meta-value" id="txt-jam-dibuat">-</span>
+        </div>
+    </div>
+</div>
+
+<!-- Info Antrean Berjalan & Estimasi (Sudah Dioptimalkan) -->
+<div class="ticket-meta-grid2">
+    <div class="meta-box">
+        <div>
+            <span class="meta-label">⏳ Antrean Saat Ini</span>
+            <span class="meta-value" id="txt-antrean-sekarang">A-021</span>
+        </div>
+    </div>
+</div>
+
+<!-- Catatan Perhatian Bawah -->
+<div class="notice-box">
+    <div class="notice-text">
+        <h5>⚠️ Perhatian</h5>
+        <p>Silakan menunggu hingga nomor Anda dipanggil. Terima kasih.</p>
+    </div>
+    <button class="btn-status-view">👁️ Lihat Status Antrean</button>
+</div>
+
+        </div>
+    </div>
+</div>
+<!-- ==========================================
+   POP-UP FORMULIR PENDAFTARAN (MODAL DI TENGAH)
+   ========================================== -->
+<div id="modal-pendaftaran" class="modal-overlay d-none">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>📋 Formulir Antrean - Kunjungan Besok</h3>
+            <button type="button" id="btn-close-modal" class="close-txt">&times;</button>
+        </div>
+        <form id="form-biodata-pasien">
+            <!-- Hidden Input untuk menyimpan data poli sementara -->
+            <input type="hidden" id="temp-poli">
+            <input type="hidden" id="temp-nomor">
+            <input type="hidden" id="temp-sekarang">
+
+            <!-- Pilihan Status Pasien -->
+            <div class="form-group">
+                <label class="form-label">Status Pasien</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="status_pasien" value="lama" checked id="pop-radio-lama"> Pasien Lama</label>
+                    <label><input type="radio" name="status_pasien" value="baru" id="pop-radio-baru"> Pasien Baru</label>
+                </div>
+            </div>
+
+            <!-- Input Identitas Dinamis -->
+            <div class="form-group">
+                <label id="pop-label-identitas" class="form-label" for="pop-identitas">Nomor Rekam Medis (RM)</label>
+                <input type="text" id="pop-identitas" placeholder="Contoh: 01-23-45" required class="form-input">
+            </div>
+
+            <!-- Nama Pasien -->
+            <div class="form-group">
+                <label class="form-label" for="pop-nama">Nama Lengkap Pasien</label>
+                <input type="text" id="pop-nama" placeholder="Sesuai KTP / KK" required class="form-input">
+            </div>
+
+            <!-- Metode Pembayaran -->
+            <div class="form-group">
+                <label class="form-label" for="pop-pembayaran">Metode Pembayaran</label>
+                <select id="pop-pembayaran" required class="form-input">
+                    <option value="Umum/Mandiri">Umum / Mandiri</option>
+                    <option value="BPJS Kesehatan">BPJS Kesehatan</option>
+                </select>
+            </div>
+
+            <!-- Tombol Konfirmasi -->
+            <button type="submit" class="btn-submit-modal">🎟️ Konfirmasi & Ambil Antrean</button>
+        </form>
+    </div>
+</div>
+
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Ambil semua elemen kartu poli tujuan
-    const kartuPoli = document.querySelectorAll(".poli-card");
-    const tombolAmbilCepat = document.getElementById("btn-ambil-cepat");
-
-    // 2. Fungsi utama untuk memicu perpindahan ke halaman struk nomor antrean
-    function cetakNomorAntrean(namaPoli, nomorBaru, antreanBerjalan) {
-        // Ambil elemen teks penampung di Halaman 2 (Struk)
-        const txtNomorAntrean = document.getElementById("txt-nomor-antrean");
-        const txtPoliTujuan = document.getElementById("txt-poli-tujuan");
-        const txtAntreanSekarang = document.getElementById("txt-antrean-sekarang");
-        const txtJamDibuat = document.getElementById("txt-jam-dibuat");
-        
-        const halamanBeranda = document.getElementById("halaman-beranda");
-        const halamanTiket = document.getElementById("halaman-tiket");
-
-        // Set waktu dibuat secara waktu nyata (Realtime)
-        const waktuSekarang = new Date();
-        const formatOpsi = { year: 'numeric', month: 'long', day: 'numeric' };
-        const tanggalLokal = waktuSekarang.toLocaleDateString('id-ID', formatOpsi);
-        const jamMenitLokal = String(waktuSekarang.getHours()).padStart(2, '0') + ':' + String(waktuSekarang.getMinutes()).padStart(2, '0');
-
-        // Jika element struk ditemukan di halaman, suntikkan datanya
-        if (txtNomorAntrean && txtPoliTujuan) {
-            txtNomorAntrean.innerText = nomorBaru;
-            txtPoliTujuan.innerText = namaPoli;
-            if (txtAntreanSekarang) txtAntreanSekarang.innerText = antreanBerjalan;
-            if (txtJamDibuat) txtJamDibuat.innerText = `${tanggalLokal}, ${jamMenitLokal} WIB`;
-
-            // Efek Transisi Sembunyikan Beranda & Munculkan Tiket Struk
-            halamanBeranda.classList.add("d-none");
-            halamanTiket.classList.remove("d-none");
-
-            // Gulir otomatis layar ke bagian paling atas agar struk langsung terbaca penuh
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    }
-
-    // 3. Pasang fungsi klik ke setiap kartu poli tujuan
-    kartuPoli.forEach(card => {
-        card.addEventListener("click", function () {
-            // Ambil data atribut dari HTML langsung
-            const poli = this.getAttribute("data-poli");
-            const nomor = this.getAttribute("data-nomor");
-            const sekarang = this.getAttribute("data-sekarang");
-            
-            cetakNomorAntrean(poli, nomor, sekarang);
-        });
-    });
-
-    // 4. Pasang fungsi klik untuk tombol ambil cepat di Banner Utama (Default ke Poli Umum)
-    if (tombolAmbilCepat) {
-        tombolAmbilCepat.addEventListener("click", function () {
-            cetakNomorAntrean("Poli Umum", "A-027", "A-021");
-        });
-    }
-
-    // 5. Fungsi Klik untuk tombol kembali ke Beranda utama dari struk
-    const tombolKembali = document.getElementById("btn-kembali");
-    const logoKembali = document.getElementById("nav-logo");
-    const menuHome = document.getElementById("nav-home");
-
-    function kembaliKeBeranda(e) {
-        if(e) e.preventDefault();
-        const halamanBeranda = document.getElementById("halaman-beranda");
-        const halamanTiket = document.getElementById("halaman-tiket");
-        
-        if(halamanTiket && halamanBeranda) {
-            halamanTiket.classList.add("d-none");
-            halamanBeranda.classList.remove("d-none");
-        }
-    }
-
-    if (tombolKembali) tombolKembali.addEventListener("click", kembaliKeBeranda);
-    if (logoKembali) logoKembali.addEventListener("click", kembaliKeBeranda);
-    if (menuHome) menuHome.addEventListener("click", kembaliKeBeranda);
-});
-document.addEventListener("DOMContentLoaded", function () {
     // =========================================================================
-    // 1. INISIALISASI ELEMEN UTAMA
+    // 1. INISIALISASI ELEMEN UTAMA & MODAL
     // =========================================================================
     const kartuPoli = document.querySelectorAll(".poli-card");
     const tombolAmbilCepat = document.getElementById("btn-ambil-cepat");
     
     const halamanBeranda = document.getElementById("halaman-beranda");
     const halamanTiket = document.getElementById("halaman-tiket");
+    const modalPendaftaran = document.getElementById("modal-pendaftaran");
+    const formBiodata = document.getElementById("form-biodata-pasien");
+    const btnCloseModal = document.getElementById("btn-close-modal");
 
+    // Elemen Input Penampung Sementara di Modal
+    const tempPoli = document.getElementById("temp-poli");
+    const tempNomor = document.getElementById("temp-nomor");
+    const tempSekarang = document.getElementById("temp-sekarang");
+
+    // Elemen Input Interaktif di Dalam Modal
+    const popRadioLama = document.getElementById("pop-radio-lama");
+    const popRadioBaru = document.getElementById("pop-radio-baru");
+    const popLabelIdentitas = document.getElementById("pop-label-identitas");
+    const popIdentitas = document.getElementById("pop-identitas");
+
+    // Elemen Teks Pada Struk Halaman 2
     const txtNomorAntrean = document.getElementById("txt-nomor-antrean");
     const txtPoliTujuan = document.getElementById("txt-poli-tujuan");
     const txtAntreanSekarang = document.getElementById("txt-antrean-sekarang");
     const txtJamDibuat = document.getElementById("txt-jam-dibuat");
+    const txtNamaPasien = document.getElementById("txt-nama-pasien");
+    const txtPenjaminanPasien = document.getElementById("txt-penjaminan-pasien");
 
-    // =========================================================================
-    // 2. FUNGSI UTAMA: GENERATE & CETAK NOMOR ANTREAN (PINDAH KE HALAMAN 2)
-    // =========================================================================
-    function cetakNomorAntrean(namaPoli, nomorBaru, antreanBerjalan) {
-        if (!halamanBeranda || !halamanTiket) return;
+    // Control Input Label Identitas di Dalam Modal (KTP vs RM)
+    popRadioLama.addEventListener("change", function() {
+        if(this.checked) {
+            popLabelIdentitas.innerText = "Nomor Rekam Medis (RM)";
+            popIdentitas.placeholder = "Contoh: 01-23-45";
+        }
+    });
+    popRadioBaru.addEventListener("change", function() {
+        if(this.checked) {
+            popLabelIdentitas.innerText = "Nomor Induk Kependudukan (NIK KTP)";
+            popIdentitas.placeholder = "Contoh: 3404XXXXXXXXXXXX";
+        }
+    });
 
-        // Mendapatkan waktu cetak secara real-time berdasarkan waktu lokal komputer
-        const waktuSekarang = new Date();
-        const formatOpsi = { year: 'numeric', month: 'long', day: 'numeric' };
-        const tanggalLokal = waktuSekarang.toLocaleDateString('id-ID', formatOpsi);
-        
-        // Memastikan menit selalu dua digit (contoh: 09:05, bukan 09:5)
-        const jam = String(waktuSekarang.getHours()).padStart(2, '0');
-        const menit = String(waktuSekarang.getMinutes()).padStart(2, '0');
+    // Buka Modal & Simpan Data Poli yang Dipilih
+    function bukaModalPendaftaran(poli, nomor, sekarang) {
+        tempPoli.value = poli;
+        tempNomor.value = nomor;
+        tempSekarang.value = sekarang;
+        modalPendaftaran.classList.remove("d-none");
+    }
 
-        // Menyuntikkan data teks ke dalam elemen struk tiket
-        if (txtNomorAntrean) txtNomorAntrean.innerText = nomorBaru;
-        if (txtPoliTujuan) txtPoliTujuan.innerText = namaPoli;
-        if (txtAntreanSekarang) txtAntreanSekarang.innerText = antreanBerjalan;
-        if (txtJamDibuat) txtJamDibuat.innerText = `${tanggalLokal}, ${jam}:${menit} WIB`;
-
-        // Proses transisi menyembunyikan halaman utama dan memunculkan struk
-        halamanBeranda.classList.add("d-none");
-        halamanTiket.classList.remove("d-none");
-
-        // Otomatis gulir layar kembali ke paling atas agar struk tidak terpotong visualnya
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Tutup Modal
+    if (btnCloseModal) {
+        btnCloseModal.addEventListener("click", () => {
+            modalPendaftaran.classList.add("d-none");
+            formBiodata.reset();
+        });
     }
 
     // =========================================================================
-    // 3. EVENT LISTENERS: PEMICU KLIK KARTU POLI & TOMBOL CEPAT
+    // 2. LOGIKA KLIK KARTU POLI & TOMBOL CEPAT (MUNCULKAN POP-UP DULU)
     // =========================================================================
-    
-    // Klik pada 5 Kartu Poli Tujuan
     kartuPoli.forEach(card => {
         card.addEventListener("click", function () {
-            // Mengambil nilai data-attribute langsung dari struktur HTML
             const poli = this.getAttribute("data-poli");
             const nomor = this.getAttribute("data-nomor");
             const sekarang = this.getAttribute("data-sekarang");
             
-            cetakNomorAntrean(poli, nomor, sekarang);
+            bukaModalPendaftaran(poli, nomor, sekarang);
         });
     });
 
-    // Klik pada Tombol Utama "Ambil Nomor Antrean" di Banner Atas (Default ke Poli Umum)
     if (tombolAmbilCepat) {
         tombolAmbilCepat.addEventListener("click", function () {
-            cetakNomorAntrean("Poli Umum", "A-027", "A-021");
+            bukaModalPendaftaran("Poli Umum", "A-027", "A-021");
         });
     }
 
     // =========================================================================
-    // 4. LOGIKA TOMBOL KEMBALI (DARI STRUK KE BERANDA)
+    // 3. LOGIKA SUBMIT FORM (SET DATA & HITUNG TANGGAL BESOK)
+    // =========================================================================
+    formBiodata.addEventListener("submit", function(e) {
+        e.preventDefault(); // Mencegah reload halaman
+
+        const namaPasien = document.getElementById("pop-nama").value;
+        const metodeBayar = document.getElementById("pop-pembayaran").value;
+
+        // --- SISTEM JADWAL: OTOMATIS SET KE BESOK PAGI ---
+        const hariIni = new Date();
+        const besok = new Date(hariIni);
+        besok.setDate(hariIni.getDate() + 1); // Tambah 1 hari ke depan
+
+        const formatOpsi = { year: 'numeric', month: 'long', day: 'numeric' };
+        const tanggalBesokLokal = besok.toLocaleDateString('id-ID', formatOpsi);
+
+        // Menyuntikkan seluruh data ke dalam elemen struk tiket (Halaman 2)
+        if (txtNomorAntrean) txtNomorAntrean.innerText = tempNomor.value;
+        if (txtPoliTujuan) txtPoliTujuan.innerText = tempPoli.value;
+        if (txtAntreanSekarang) txtAntreanSekarang.innerText = tempSekarang.value;
+        
+        // Keterangan waktu pelayanan diset besok pagi jam operasional mulai 07:30
+        if (txtJamDibuat) txtJamDibuat.innerText = `${tanggalBesokLokal}, Mulai 07:30 WIB`;
+        
+        if (txtNamaPasien) txtNamaPasien.innerText = namaPasien;
+        if (txtPenjaminanPasien) txtPenjaminanPasien.innerText = metodeBayar;
+
+        // Sembunyikan modal dan halaman beranda, lalu munculkan struk
+        modalPendaftaran.classList.add("d-none");
+        halamanBeranda.classList.add("d-none");
+        halamanTiket.classList.remove("d-none");
+
+        // Reset isi form untuk pendaftaran berikutnya
+        formBiodata.reset();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // =========================================================================
+    // 4. LOGIKA TOMBOL KEMBALI
     // =========================================================================
     const tombolKembali = document.getElementById("btn-kembali");
     const logoKembali = document.getElementById("nav-logo");
@@ -780,7 +938,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function kembaliKeBeranda(e) {
         if (e) e.preventDefault();
-        
         if (halamanTiket && halamanBeranda) {
             halamanTiket.classList.add("d-none");
             halamanBeranda.classList.remove("d-none");
@@ -788,13 +945,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Daftarkan aksi kembali jika elemen-elemen navigasi diklik
     if (tombolKembali) tombolKembali.addEventListener("click", kembaliKeBeranda);
     if (logoKembali) logoKembali.addEventListener("click", kembaliKeBeranda);
     if (menuHome) menuHome.addEventListener("click", kembaliKeBeranda);
-
-    console.log("Sistem Antrean JS Berhasil Dimuat Terpisah!");
 });
-
 </script>
+
 @endsection

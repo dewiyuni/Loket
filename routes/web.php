@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\AntreanController;
 use Illuminate\Support\Facades\Route;
-
 
 // =========================
 // HALAMAN PASIEN
@@ -49,10 +49,9 @@ Route::get('/petugas/login', function () {
     return view('petugas.login');
 });
 
-Route::get('/petugas/dashboard', function () {
-    return view('petugas.dashboard');
-});
-
+Route::get('/petugas/dashboard', [AntreanController::class, 'index'])->name('petugas.dashboard');
+// Route API untuk update status antrean lewat JavaScript Fetch
+Route::post('/petugas/antrean/{id}/update-status', [AntreanController::class, 'updateStatus'])->name('antrean.update-status');
 Route::get('/petugas/antrian', function () {
     return view('petugas.antrian');
 });
@@ -61,9 +60,13 @@ Route::get('/petugas/pasien', function () {
     return view('petugas.pasien');
 });
 
+// Menampilkan halaman form pendaftaran
 Route::get('/petugas/pendaftaran', function () {
     return view('petugas.pendaftaran');
-});
+})->name('petugas.pendaftaran');
+
+// Memproses data pendaftaran ke database (kita titipkan ke AntreanController)
+Route::post('/petugas/pendaftaran/simpan', [App\Http\Controllers\AntreanController::class, 'storePendaftaran'])->name('pendaftaran.simpan');
 
 Route::get('/petugas/laporan', function () {
     return view('petugas.laporan');
