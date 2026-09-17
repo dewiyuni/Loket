@@ -11,21 +11,14 @@ Route::get('/', function () {
     return view('loket');
 });
 
-Route::get('/beranda', function () {
-    return view('pasien.beranda');
-});
+Route::get('/beranda', [AntreanController::class, 'ambilAntrianIndex'])->name('pasien.beranda');
 
-Route::get('/ambil-antrian', function () {
-    return view('pasien.ambil-antrian');
-});
-
+Route::post('/pasien/pendaftaran/simpan', [AntreanController::class, 'storePendaftaranPasien'])->name('pasien.pendaftaran.simpan');
 Route::get('/nomor-antrian', function () {
     return view('pasien.nomor-antrian');
 });
 
-Route::get('/cek-antrian', function () {
-    return view('pasien.cek-antrian');
-});
+Route::get('/cek-antrian', [AntreanController::class, 'cekAntrian'])->name('pasien.cekAntrian');
 
 
 // =========================

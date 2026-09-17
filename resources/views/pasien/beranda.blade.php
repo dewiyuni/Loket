@@ -11,7 +11,7 @@
     margin: 0;
     padding: 0;
 }
-
+html{scroll-behavior: smooth}
 body { 
     background-color: #f8fafc; 
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
@@ -106,7 +106,7 @@ body {
    3. PILIH POLI TUJUAN (GRID CARDS)
    ========================================== */
 .poli-section { 
-    padding: 70px 0; 
+    padding: 70px 0; scroll-behavior: smooth; 
 }
 
 .section-title { 
@@ -192,7 +192,7 @@ body {
         padding: 40px 0;
     }
     .poli-section {
-        padding: 40px 0;
+        padding: 40px 0;scroll-behavior: smooth; 
     }
 }
 /* ==========================================
@@ -602,42 +602,46 @@ body {
         </section>
 
         <!-- PILIH POLI TUJUAN SECTION -->
-        <section class="poli-section">
+        <section id="poli-section" class="poli-section">
             <div class="container">
                 <h2 class="section-title">Pilih Poli Tujuan</h2>
                 <div class="poli-grid">
                     
                     <!-- Poli Umum -->
-                    <div class="poli-card" data-poli="Poli Umum" data-nomor="A-027" data-sekarang="A-021">
-                        <span class="poli-icon">🩺</span>
+                    <div class="poli-card" data-poli="Poli Umum" data-nomor="{{ $nomorTerakhir['umum'] }}" data-sekarang="{{ $antreanSekarang['umum'] }}">
+                        <span class="poli-icon">🏥</span>
                         <h3>Poli Umum</h3>
                         <p>Layanan kesehatan umum</p>
                     </div>
 
                     <!-- Poli Gigi -->
-                    <div class="poli-card" data-poli="Poli Gigi" data-nomor="B-014" data-sekarang="B-009">
-                        <span class="poli-icon">🦷</span>
+                    
+                    <div class="poli-card" data-poli="Poli Gigi" data-nomor="{{ $nomorTerakhir['gigi'] }}" data-sekarang="{{ $antreanSekarang['gigi'] }}">
+                        <span class="poli-icon">✨</span>
                         <h3>Poli Gigi</h3>
                         <p>Layanan kesehatan gigi dan mulut</p>
+                        <!-- Menampilkan teks pendukung di bawah kartu -->
+                        <small style="color: #64748b; font-weight: 600; display: block; margin-top: 8px;">
+                            Dipanggil: {{ $antreanSekarang['gigi'] }}
+                        </small>
                     </div>
-
                     <!-- KIA / KB -->
-                    <div class="poli-card" data-poli="KIA / KB" data-nomor="C-008" data-sekarang="C-005">
-                        <span class="poli-icon">🤰</span>
+                    <div class="poli-card" data-poli="KIA / KB" data-nomor="{{ $nomorTerakhir['kia'] }}" data-sekarang=""{{ $antreanSekarang['kia'] }}"">
+                        <span class="poli-icon">👶</span>
                         <h3>KIA / KB</h3>
                         <p>Kesehatan Ibu, anak dan KB</p>
                     </div>
 
                     <!-- Imunisasi -->
-                    <div class="poli-card" data-poli="Imunisasi" data-nomor="D-005" data-sekarang="D-002">
+                    <div class="poli-card" data-poli="Imunisasi" data-nomor="{{ $nomorTerakhir['imun'] }}" data-sekarang="{{ $antreanSekarang['imun'] }}">
                         <span class="poli-icon">💉</span>
                         <h3>Imunisasi</h3>
                         <p>Layanan imunisasi bayi & anak</p>
                     </div>
 
                     <!-- Lansia -->
-                    <div class="poli-card" data-poli="Lansia" data-nomor="E-019" data-sekarang="E-012">
-                        <span class="poli-icon">🧓</span>
+                    <div class="poli-card" data-poli="Lansia" data-nomor="{{ $nomorTerakhir['lansia'] }}" data-sekarang="{{ $antreanSekarang['lansia'] }}">
+                        <span class="poli-icon">👴</span>
                         <h3>Lansia</h3>
                         <p>Layanan kesehatan lanjut usia</p>
                     </div>
@@ -694,7 +698,7 @@ body {
             </div>
             
             <p class="ticket-title">Nomor Antrean Anda</p>
-            <div class="ticket-number" id="txt-nomor-antrean">A-000</div>
+            <div class="ticket-number" id="txt-nomor-antrean">U-000</div>
             <p class="ticket-thanks">Terima kasih, nomor antrean Anda telah berhasil dibuat</p>
 
             <!-- ==========================================
@@ -740,7 +744,7 @@ body {
     <div class="meta-box">
         <div>
             <span class="meta-label">⏳ Antrean Saat Ini</span>
-            <span class="meta-value" id="txt-antrean-sekarang">A-021</span>
+            <span class="meta-value" id="txt-antrean-sekarang">U-021</span>
         </div>
     </div>
 </div>
@@ -843,25 +847,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const txtPenjaminanPasien = document.getElementById("txt-penjaminan-pasien");
 
     // Control Input Label Identitas di Dalam Modal (KTP vs RM)
-    popRadioLama.addEventListener("change", function() {
-        if(this.checked) {
-            popLabelIdentitas.innerText = "Nomor Rekam Medis (RM)";
-            popIdentitas.placeholder = "Contoh: 01-23-45";
-        }
-    });
-    popRadioBaru.addEventListener("change", function() {
-        if(this.checked) {
-            popLabelIdentitas.innerText = "Nomor Induk Kependudukan (NIK KTP)";
-            popIdentitas.placeholder = "Contoh: 3404XXXXXXXXXXXX";
-        }
-    });
+    if(popRadioLama && popRadioBaru) {
+        popRadioLama.addEventListener("change", function() {
+            if(this.checked) {
+                popLabelIdentitas.innerText = "Nomor Rekam Medis (RM)";
+                popIdentitas.placeholder = "Contoh: 01-23-45";
+            }
+        });
+        popRadioBaru.addEventListener("change", function() {
+            if(this.checked) {
+                popLabelIdentitas.innerText = "Nomor Induk Kependudukan (NIK KTP)";
+                popIdentitas.placeholder = "Contoh: 3404XXXXXXXXXXXX";
+            }
+        });
+    }
 
     // Buka Modal & Simpan Data Poli yang Dipilih
     function bukaModalPendaftaran(poli, nomor, sekarang) {
-        tempPoli.value = poli;
-        tempNomor.value = nomor;
-        tempSekarang.value = sekarang;
-        modalPendaftaran.classList.remove("d-none");
+        if(tempPoli) tempPoli.value = poli;
+        if(tempNomor) tempNomor.value = nomor;
+        if(tempSekarang) tempSekarang.value = sekarang;
+        if(modalPendaftaran) modalPendaftaran.classList.remove("d-none");
     }
 
     // Tutup Modal
@@ -873,7 +879,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // =========================================================================
-    // 2. LOGIKA KLIK KARTU POLI & TOMBOL CEPAT (MUNCULKAN POP-UP DULU)
+    // 2. LOGIKA KLIK KARTU POLI & TOMBOL CEPAT
     // =========================================================================
     kartuPoli.forEach(card => {
         card.addEventListener("click", function () {
@@ -887,47 +893,87 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (tombolAmbilCepat) {
         tombolAmbilCepat.addEventListener("click", function () {
-            bukaModalPendaftaran("Poli Umum", "A-027", "A-021");
+            const targetSection = document.getElementById("poli-section");
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: "smooth" });
+            }
         });
     }
 
     // =========================================================================
-    // 3. LOGIKA SUBMIT FORM (SET DATA & HITUNG TANGGAL BESOK)
+    // 3. 🌟 LOGIKA SUBMIT FORM (SUDAH DIPERBAIKI AGAR MASUK DATABASE & TAMPILKAN STRUK)
     // =========================================================================
-    formBiodata.addEventListener("submit", function(e) {
-        e.preventDefault(); // Mencegah reload halaman
+    if (formBiodata) {
+        formBiodata.addEventListener("submit", function(e) {
+            e.preventDefault(); // Mencegah reload agar kita bisa kirim via AJAX Fetch
 
-        const namaPasien = document.getElementById("pop-nama").value;
-        const metodeBayar = document.getElementById("pop-pembayaran").value;
+            const token = document.querySelector('meta[name="csrf-token"]');
+            if (!token) {
+                alert("Eror: Tag <meta name='csrf-token'> belum dipasang di dalam <head> HTML Anda!");
+                return;
+            }
 
-        // --- SISTEM JADWAL: OTOMATIS SET KE BESOK PAGI ---
-        const hariIni = new Date();
-        const besok = new Date(hariIni);
-        besok.setDate(hariIni.getDate() + 1); // Tambah 1 hari ke depan
+            // Ambil values input dari form untuk dikirim ke Laravel
+            const statusPasien = document.querySelector('input[name="status_pasien"]:checked').value;
+            const identitas = document.getElementById("pop-identitas").value;
+            const namaPasien = document.getElementById("pop-nama").value;
+            const metodeBayar = document.getElementById("pop-pembayaran") ? document.getElementById("pop-pembayaran").value : 'Umum';
 
-        const formatOpsi = { year: 'numeric', month: 'long', day: 'numeric' };
-        const tanggalBesokLokal = besok.toLocaleDateString('id-ID', formatOpsi);
+            // Data paket yang akan dikirimkan ke AntreanController
+            const formData = {
+                temp_poli: tempPoli.value,
+                status_pasien: statusPasien,
+                identitas: identitas,
+                nama_pasien: namaPasien
+            };
 
-        // Menyuntikkan seluruh data ke dalam elemen struk tiket (Halaman 2)
-        if (txtNomorAntrean) txtNomorAntrean.innerText = tempNomor.value;
-        if (txtPoliTujuan) txtPoliTujuan.innerText = tempPoli.value;
-        if (txtAntreanSekarang) txtAntreanSekarang.innerText = tempSekarang.value;
-        
-        // Keterangan waktu pelayanan diset besok pagi jam operasional mulai 07:30
-        if (txtJamDibuat) txtJamDibuat.innerText = `${tanggalBesokLokal}, Mulai 07:30 WIB`;
-        
-        if (txtNamaPasien) txtNamaPasien.innerText = namaPasien;
-        if (txtPenjaminanPasien) txtPenjaminanPasien.innerText = metodeBayar;
+            // Menembak route simpan pendaftaran milik Laravel Backend
+            fetch("/pasien/pendaftaran/simpan", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": token.getAttribute('content')
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // JIKA CODES CONTROLLER MENYATAKAN SUKSES DI DATABASE
+                if (data.success) {
+                    // --- SISTEM JADWAL: HITUNG TANGGAL BESOK ---
+                    const hariIni = new Date();
+                    const besok = new Date(hariIni);
+                    besok.setDate(hariIni.getDate() + 1);
 
-        // Sembunyikan modal dan halaman beranda, lalu munculkan struk
-        modalPendaftaran.classList.add("d-none");
-        halamanBeranda.classList.add("d-none");
-        halamanTiket.classList.remove("d-none");
+                    const formatOpsi = { year: 'numeric', month: 'long', day: 'numeric' };
+                    const tanggalBesokLokal = besok.toLocaleDateString('id-ID', formatOpsi);
 
-        // Reset isi form untuk pendaftaran berikutnya
-        formBiodata.reset();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+                    // Menyuntikkan nomor antrean dinamis yang baru saja di-generate asli dari database
+                    if (txtNomorAntrean) txtNomorAntrean.innerText = data.nomor_baru;
+                    if (txtPoliTujuan) txtPoliTujuan.innerText = data.poli_baru;
+                    if (txtAntreanSekarang) txtAntreanSekarang.innerText = tempSekarang.value;
+                    if (txtJamDibuat) txtJamDibuat.innerText = `${tanggalBesokLokal}, Mulai 07:30 WIB`;
+                    if (txtNamaPasien) txtNamaPasien.innerText = namaPasien;
+                    if (txtPenjaminanPasien) txtPenjaminanPasien.innerText = metodeBayar;
+
+                    // Sembunyikan pop-up pendaftaran dan halaman depan, tampilkan struk tiket sukses
+                    if (modalPendaftaran) modalPendaftaran.classList.add("d-none");
+                    if (halamanBeranda) halamanBeranda.classList.add("d-none");
+                    if (halamanTiket) halamanTiket.classList.remove("d-none");
+
+                    // Reset form agar bersih kembali
+                    formBiodata.reset();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    alert("Gagal memproses pendaftaran antrean: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Terjadi kegagalan koneksi sistem ke backend database klinik.");
+            });
+        });
+    }
 
     // =========================================================================
     // 4. LOGIKA TOMBOL KEMBALI
@@ -941,7 +987,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (halamanTiket && halamanBeranda) {
             halamanTiket.classList.add("d-none");
             halamanBeranda.classList.remove("d-none");
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.location.reload(); // 🌟 Fitur Tambahan: Reload halus saat klik kembali agar angka counter 'data-nomor' di beranda ter-update dinamis
         }
     }
 
@@ -949,6 +995,25 @@ document.addEventListener("DOMContentLoaded", function () {
     if (logoKembali) logoKembali.addEventListener("click", kembaliKeBeranda);
     if (menuHome) menuHome.addEventListener("click", kembaliKeBeranda);
 });
+
+// =========================================================================
+// 5. LOGIKA SCROLL SMOOTH PADA ELEMEN UTAMA (FIXED)
+// =========================================================================
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+
+window.addEventListener('beforeunload', function () {
+    window.scrollTo(0, 0); 
+});
+
+window.addEventListener('load', function () {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
 </script>
+
 
 @endsection
