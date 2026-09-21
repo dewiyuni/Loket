@@ -608,7 +608,10 @@ body {
                 <div class="poli-grid">
                     
                     <!-- Poli Umum -->
-                    <div class="poli-card" data-poli="Poli Umum" data-nomor="{{ $nomorTerakhir['umum'] }}" data-sekarang="{{ $antreanSekarang['umum'] }}">
+                    <div class="poli-card"
+     data-poli="Poli Umum"
+     data-nomor="{{ $nomorTerakhir['umum'] }}"
+     data-sekarang="{{ $antreanSekarang['umum'] }}">
                         <span class="poli-icon">🏥</span>
                         <h3>Poli Umum</h3>
                         <p>Layanan kesehatan umum</p>
@@ -616,7 +619,10 @@ body {
 
                     <!-- Poli Gigi -->
                     
-                    <div class="poli-card" data-poli="Poli Gigi" data-nomor="{{ $nomorTerakhir['gigi'] }}" data-sekarang="{{ $antreanSekarang['gigi'] }}">
+<div class="poli-card"
+     data-poli="Poli Gigi"
+     data-nomor="{{ $nomorTerakhir['gigi'] }}"
+     data-sekarang="{{ $antreanSekarang['gigi'] }}">
                         <span class="poli-icon">✨</span>
                         <h3>Poli Gigi</h3>
                         <p>Layanan kesehatan gigi dan mulut</p>
@@ -626,20 +632,30 @@ body {
                         </small>
                     </div>
                     <!-- KIA / KB -->
-                    <div class="poli-card" data-poli="KIA / KB" data-nomor="{{ $nomorTerakhir['kia'] }}" data-sekarang=""{{ $antreanSekarang['kia'] }}"">
-                        <span class="poli-icon">👶</span>
+<!-- KIA / KB -->
+<div class="poli-card"
+     data-poli="KIA / KB"
+     data-nomor="{{ $nomorTerakhir['kia'] }}"
+     data-sekarang="{{ $antreanSekarang['kia'] }}">                        <span class="poli-icon">👶</span>
                         <h3>KIA / KB</h3>
                         <p>Kesehatan Ibu, anak dan KB</p>
                     </div>
 
                     <!-- Imunisasi -->
-                    <div class="poli-card" data-poli="Imunisasi" data-nomor="{{ $nomorTerakhir['imun'] }}" data-sekarang="{{ $antreanSekarang['imun'] }}">
+                    <div class="poli-card"
+     data-poli="Imunisasi"
+     data-nomor="{{ $nomorTerakhir['imun'] }}"
+     data-sekarang="{{ $antreanSekarang['imun'] }}">
                         <span class="poli-icon">💉</span>
                         <h3>Imunisasi</h3>
                         <p>Layanan imunisasi bayi & anak</p>
                     </div>
 
                     <!-- Lansia -->
+                    <div class="poli-card"
+     data-poli="Lansia"
+     data-nomor="{{ $nomorTerakhir['lansia'] }}"
+     data-sekarang="{{ $antreanSekarang['lansia'] }}">
                     <div class="poli-card" data-poli="Lansia" data-nomor="{{ $nomorTerakhir['lansia'] }}" data-sekarang="{{ $antreanSekarang['lansia'] }}">
                         <span class="poli-icon">👴</span>
                         <h3>Lansia</h3>
@@ -739,16 +755,17 @@ body {
     </div>
 </div>
 
+
 <!-- Info Antrean Berjalan & Estimasi (Sudah Dioptimalkan) -->
 <div class="ticket-meta-grid2">
     <div class="meta-box">
         <div>
             <span class="meta-label">⏳ Antrean Saat Ini</span>
-            <span class="meta-value" id="txt-antrean-sekarang">U-021</span>
+            <span class="meta-value" id="txt-antrean-sekarang">-</span>
         </div>
     </div>
 </div>
-
+     
 <!-- Catatan Perhatian Bawah -->
 <div class="notice-box">
     <div class="notice-text">
@@ -938,36 +955,90 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(response => response.json())
             .then(data => {
-                // JIKA CODES CONTROLLER MENYATAKAN SUKSES DI DATABASE
-                if (data.success) {
-                    // --- SISTEM JADWAL: HITUNG TANGGAL BESOK ---
-                    const hariIni = new Date();
-                    const besok = new Date(hariIni);
-                    besok.setDate(hariIni.getDate() + 1);
+    if (data.success) {
 
-                    const formatOpsi = { year: 'numeric', month: 'long', day: 'numeric' };
-                    const tanggalBesokLokal = besok.toLocaleDateString('id-ID', formatOpsi);
+        // =====================================================
+        // DATA ANTREAN HASIL DARI BACKEND
+        // =====================================================
 
-                    // Menyuntikkan nomor antrean dinamis yang baru saja di-generate asli dari database
-                    if (txtNomorAntrean) txtNomorAntrean.innerText = data.nomor_baru;
-                    if (txtPoliTujuan) txtPoliTujuan.innerText = data.poli_baru;
-                    if (txtAntreanSekarang) txtAntreanSekarang.innerText = tempSekarang.value;
-                    if (txtJamDibuat) txtJamDibuat.innerText = `${tanggalBesokLokal}, Mulai 07:30 WIB`;
-                    if (txtNamaPasien) txtNamaPasien.innerText = namaPasien;
-                    if (txtPenjaminanPasien) txtPenjaminanPasien.innerText = metodeBayar;
+        if (txtNomorAntrean) {
+            txtNomorAntrean.innerText = data.nomor_baru;
+        }
 
-                    // Sembunyikan pop-up pendaftaran dan halaman depan, tampilkan struk tiket sukses
-                    if (modalPendaftaran) modalPendaftaran.classList.add("d-none");
-                    if (halamanBeranda) halamanBeranda.classList.add("d-none");
-                    if (halamanTiket) halamanTiket.classList.remove("d-none");
+        if (txtPoliTujuan) {
+            txtPoliTujuan.innerText = data.poli_baru;
+        }
 
-                    // Reset form agar bersih kembali
-                    formBiodata.reset();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    alert("Gagal memproses pendaftaran antrean: " + data.message);
-                }
-            })
+        // Antrean yang sedang dipanggil untuk poli yang dipilih
+        if (txtAntreanSekarang) {
+            txtAntreanSekarang.innerText =
+                tempSekarang.value || "Belum dipanggil";
+        }
+
+        // =====================================================
+        // DATA PASIEN
+        // =====================================================
+
+        if (txtNamaPasien) {
+            txtNamaPasien.innerText = namaPasien;
+        }
+
+        if (txtPenjaminanPasien) {
+            txtPenjaminanPasien.innerText = metodeBayar;
+        }
+
+        // =====================================================
+        // WAKTU
+        // =====================================================
+
+        const hariIni = new Date();
+        const besok = new Date(hariIni);
+        besok.setDate(hariIni.getDate() + 1);
+
+        const formatOpsi = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+
+        const tanggalBesokLokal =
+            besok.toLocaleDateString('id-ID', formatOpsi);
+
+        if (txtJamDibuat) {
+            txtJamDibuat.innerText =
+                `${tanggalBesokLokal}, Mulai 07:30 WIB`;
+        }
+
+        // =====================================================
+        // TAMPILKAN TIKET
+        // =====================================================
+
+        if (modalPendaftaran) {
+            modalPendaftaran.classList.add("d-none");
+        }
+
+        if (halamanBeranda) {
+            halamanBeranda.classList.add("d-none");
+        }
+
+        if (halamanTiket) {
+            halamanTiket.classList.remove("d-none");
+        }
+
+        formBiodata.reset();
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+    } else {
+        alert(
+            "Gagal memproses pendaftaran antrean: " +
+            data.message
+        );
+    }
+})
             .catch(error => {
                 console.error("Error:", error);
                 alert("Terjadi kegagalan koneksi sistem ke backend database klinik.");
