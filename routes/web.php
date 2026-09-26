@@ -26,7 +26,7 @@ Route::get('/cek-antrian', [AntreanController::class, 'cekAntrian'])->name('pasi
 // =========================
 
 Route::get('/informasi', function () {
-    return view('informasi.informasi');
+    return view('pasien.informasi');
 });
 
 Route::get('/tentang-kami', function () {

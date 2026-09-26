@@ -303,5 +303,10 @@ class AntreanController extends Controller
         // Kirim data ke view pasien.cek-antrian
         return view('pasien.cek-antrian', compact('rekapAntrean'));
     }
+    // 7. Menampilkan Halaman Informasi / Beranda Pasien
+    public function informasi()
+    {
+        return $this->ambilAntrianIndex();
+    }
 
 }
