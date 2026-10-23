@@ -37,7 +37,10 @@
 <body>
 
 <div class="container">
-    <div class="header">
+    <div class="header"> 
+        
+        <a href="/beranda" class="btn">🔙 Kembali ke Beranda</a>
+    </div>
         <h1>📊 Monitor Status Antrean Loket</h1>
         <p>Data diperbarui secara real-time • Hari Ini: {{ \Carbon\Carbon::today()->translatedFormat('d F Y') }}</p>
     </div>
@@ -65,9 +68,7 @@
         @endforeach
     </div>
 
-    <div class="footer-btn">
-        <a href="/beranda" class="btn">🔙 Kembali ke Beranda</a>
-    </div>
+    
 </div>
 
 </body>

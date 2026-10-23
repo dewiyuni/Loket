@@ -568,6 +568,8 @@ body {
 }
 
 </style>
+
+
     <!-- ==========================================
        HALAMAN 1: CONTAINER BERANDA UTAMA PASIEN
        ========================================== -->
@@ -656,7 +658,6 @@ body {
      data-poli="Lansia"
      data-nomor="{{ $nomorTerakhir['lansia'] }}"
      data-sekarang="{{ $antreanSekarang['lansia'] }}">
-                    <div class="poli-card" data-poli="Lansia" data-nomor="{{ $nomorTerakhir['lansia'] }}" data-sekarang="{{ $antreanSekarang['lansia'] }}">
                         <span class="poli-icon">👴</span>
                         <h3>Lansia</h3>
                         <p>Layanan kesehatan lanjut usia</p>
@@ -977,7 +978,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 temp_poli: tempPoli.value,
                 status_pasien: statusPasien,
                 identitas: identitas,
-                nama_pasien: namaPasien
+                nama_pasien: namaPasien,
+                metode_pembayaran: metodeBayar
             };
 
             // Menembak route simpan pendaftaran milik Laravel Backend
