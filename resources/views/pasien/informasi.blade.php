@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('title', 'Beranda - Puskesmas Sidorejo')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -284,39 +289,7 @@
         </div>
     </div>
 
-    <!-- SECTION KONTEN RINGKAS (Ringkasan dari Beranda) -->
-    <section class="info-section">
-        <div class="container">
-            <div class="info-grid">
-                <!-- Item 1: Jam Operasional -->
-                <div class="info-item">
-                    <span class="info-badge">🕒</span>
-                    <div class="info-content">
-                        <h4>Jam Operasional</h4>
-                        <p>Senin - Jumat&#10;07.30 - 14.00 WIB</p>
-                    </div>
-                </div>
-
-                <!-- Item 2: Perhatian -->
-                <div class="info-item">
-                    <span class="info-badge">⚠️</span>
-                    <div class="info-content">
-                        <h4>Perhatian</h4>
-                        <p>Harap datang 15 menit sebelum estimasi waktu</p>
-                    </div>
-                </div>
-
-                <!-- Item 3: Hubungi Kami -->
-                <div class="info-item">
-                    <span class="info-badge">📞</span>
-                    <div class="info-content">
-                        <h4>Hubungi Kami</h4>
-                        <p>(0274) 1234567&#10;puskesmassidorejo@example.id</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
 </body>
 </html>
+
+@endsection

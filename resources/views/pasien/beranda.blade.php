@@ -611,9 +611,9 @@ body {
                     
                     <!-- Poli Umum -->
                     <div class="poli-card"
-     data-poli="Poli Umum"
-     data-nomor="{{ $nomorTerakhir['umum'] }}"
-     data-sekarang="{{ $antreanSekarang['umum'] }}">
+                        data-poli="Poli Umum"
+                        data-nomor="{{ $nomorTerakhir['umum'] }}"
+                        data-sekarang="{{ $antreanSekarang['umum'] }}">
                         <span class="poli-icon">🏥</span>
                         <h3>Poli Umum</h3>
                         <p>Layanan kesehatan umum</p>
@@ -621,10 +621,10 @@ body {
 
                     <!-- Poli Gigi -->
                     
-<div class="poli-card"
-     data-poli="Poli Gigi"
-     data-nomor="{{ $nomorTerakhir['gigi'] }}"
-     data-sekarang="{{ $antreanSekarang['gigi'] }}">
+                    <div class="poli-card"
+                        data-poli="Poli Gigi"
+                        data-nomor="{{ $nomorTerakhir['gigi'] }}"
+                        data-sekarang="{{ $antreanSekarang['gigi'] }}">
                         <span class="poli-icon">✨</span>
                         <h3>Poli Gigi</h3>
                         <p>Layanan kesehatan gigi dan mulut</p>
@@ -634,20 +634,20 @@ body {
                         </small>
                     </div>
                     <!-- KIA / KB -->
-<!-- KIA / KB -->
-<div class="poli-card"
-     data-poli="KIA / KB"
-     data-nomor="{{ $nomorTerakhir['kia'] }}"
-     data-sekarang="{{ $antreanSekarang['kia'] }}">                        <span class="poli-icon">👶</span>
+                    <div class="poli-card"
+                        data-poli="KIA / KB"
+                        data-nomor="{{ $nomorTerakhir['kia'] }}"
+                        data-sekarang="{{ $antreanSekarang['kia'] }}">                        
+                        <span class="poli-icon">👶</span>
                         <h3>KIA / KB</h3>
                         <p>Kesehatan Ibu, anak dan KB</p>
                     </div>
 
                     <!-- Imunisasi -->
                     <div class="poli-card"
-     data-poli="Imunisasi"
-     data-nomor="{{ $nomorTerakhir['imun'] }}"
-     data-sekarang="{{ $antreanSekarang['imun'] }}">
+                        data-poli="Imunisasi"
+                        data-nomor="{{ $nomorTerakhir['imun'] }}"
+                        data-sekarang="{{ $antreanSekarang['imun'] }}">
                         <span class="poli-icon">💉</span>
                         <h3>Imunisasi</h3>
                         <p>Layanan imunisasi bayi & anak</p>
@@ -655,9 +655,9 @@ body {
 
                     <!-- Lansia -->
                     <div class="poli-card"
-     data-poli="Lansia"
-     data-nomor="{{ $nomorTerakhir['lansia'] }}"
-     data-sekarang="{{ $antreanSekarang['lansia'] }}">
+                        data-poli="Lansia"
+                        data-nomor="{{ $nomorTerakhir['lansia'] }}"
+                        data-sekarang="{{ $antreanSekarang['lansia'] }}">
                         <span class="poli-icon">👴</span>
                         <h3>Lansia</h3>
                         <p>Layanan kesehatan lanjut usia</p>
@@ -666,72 +666,6 @@ body {
                 </div>
             </div>
         </section>
-
-        <!-- INFORMASI FOOTER SECTION -->
-        <section class="info-section">
-            <div class="container">
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-badge">🕒</span>
-                        <div class="info-content">
-                            <h4>Jam Operasional</h4>
-                            <p>Senin - Jumat&#10;07.30 - 14.00 WIB</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-badge">⚠️</span>
-                        <div class="info-content">
-                            <h4>Perhatian</h4>
-                            <p>Harap datang 15 menit sebelum estimasi waktu</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-badge">📞</span>
-                        <div class="info-content">
-                            <h4>Hubungi Kami</h4>
-                            <p>(0274) 1234567&#10;puskesmassidorejo@example.id</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================
-             INFORMASI FOOTER SECTION
-             ========================================== -->
-        <section class="info-section">
-            <div class="container">
-                <div class="info-grid">
-                    <!-- Item 1: Jam Operasional -->
-                    <div class="info-item">
-                        <span class="info-badge">🕒</span>
-                        <div class="info-content">
-                            <h4>Jam Operasional</h4>
-                            <p>Senin - Jumat&#10;07.30 - 14.00 WIB</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 2: Perhatian -->
-                    <div class="info-item">
-                        <span class="info-badge">⚠️</span>
-                        <div class="info-content">
-                            <h4>Perhatian</h4>
-                            <p>Harap datang 15 menit sebelum estimasi waktu</p>
-                        </div>
-                    </div>
-
-                    <!-- Item 3: Hubungi Kami -->
-                    <div class="info-item">
-                        <span class="info-badge">📞</span>
-                        <div class="info-content">
-                            <h4>Hubungi Kami</h4>
-                            <p>(0274) 1234567&#10;puskesmassidorejo@example.id</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
 
     <!-- ==========================================
    HALAMAN 2: CONTAINER STRUK TIKET ANTREAN PASIEN
