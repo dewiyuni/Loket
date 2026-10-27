@@ -24,37 +24,45 @@
             padding: 0 24px;
         }
 
-        /* HEADER PAGE */
+        /* HEADER PAGE - HIJAU MODERN SENADA BERANDA */
         .page-header {
-            background-color: #ffffff;
-            padding: 40px 0 20px;
-            border-bottom: 1px solid #e2e8f0;
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, #00875a, #006644);
+            color: #ffffff;
+            padding: 25px 0 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .page-header h1 {
-            color: #0f172a;
-            font-size: 28px;
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 800;
             margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
         .page-header p {
-            color: #64748b;
+            color: rgba(255, 255, 255, 0.9);
             font-size: 16px;
+            max-width: 600px;
         }
 
         .btn-kembali {
             display: inline-block;
-            margin-bottom: 16px;
-            color: #0284c7;
-            text-navigation: none;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 20px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             text-decoration: none;
+            transition: background 0.2s;
         }
 
         .btn-kembali:hover {
-            text-decoration: underline;
+            background: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
         }
 
         /* CONTENT STYLES */
@@ -93,7 +101,7 @@
             background: #f8fafc;
             padding: 20px;
             border-radius: 8px;
-            border-left: 4px solid #0284c7;
+            border-left: 4px solid #00875a;
         }
 
         .vm-box h4 {
@@ -111,6 +119,79 @@
         .vm-box ul li {
             margin-bottom: 6px;
         }
+
+        /* STRUKTUR ORGANISASI STYLES */
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 24px;
+            width: 100%;
+        }
+
+        .org-level-1 {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0px;
+            width: 100%;
+        }
+
+        .org-level-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-top: 0;
+        }
+
+        .org-box {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px 16px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .org-box:hover {
+            transform: translateY(-3px);
+            border-color: #00875a;
+        }
+
+        .org-box.leader {
+            background: #f0fdf4;
+            border-color: #00875a;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .org-box .role {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #00875a;
+            margin-bottom: 4px;
+        }
+
+        .org-box .name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .org-box .nip {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .line-down {
+            width: 2px;
+            height: 24px;
+            background-color: #cbd5e1;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -126,6 +207,7 @@
 
     <!-- KONTEN UTAMA -->
     <div class="container">
+        <!-- CARD PROFIL & VISI MISI -->
         <div class="content-card">
             <h3>🏥 Profil Puskesmas Sidorejo</h3>
             <p>
@@ -153,87 +235,12 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- STRUKTUR ORGANISASI -->
-        <div class="content-card" style="margin-top: 30px;">
+        <!-- CARD STRUKTUR ORGANISASI -->
+        <div class="content-card">
             <h3>👥 Struktur Organisasi Puskesmas</h3>
             <p>Susunan pimpinan dan penanggung jawab layanan kesehatan di Puskesmas Sidorejo.</p>
             
-            <style>
-                .org-chart {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    margin-top: 30px;
-                    width: 100%;
-                }
-
-                .org-level-1 {
-                    display: flex;
-                    justify-content: center;
-                    margin-bottom: 30px;
-                    width: 100%;
-                }
-
-                .org-level-2 {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-                    gap: 20px;
-                    width: 100%;
-                }
-
-                .org-box {
-                    background: #ffffff;
-                    border: 2px solid #e2e8f0;
-                    border-radius: 10px;
-                    padding: 16px;
-                    text-align: center;
-                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-                    transition: transform 0.2s;
-                }
-
-                .org-box:hover {
-                    transform: translateY(-3px);
-                    border-color: #0284c7;
-                }
-
-                .org-box.leader {
-                    background: #f0f9ff;
-                    border-color: #0284c7;
-                    max-width: 300px;
-                    margin: 0 auto;
-                }
-
-                .org-box .role {
-                    font-size: 12px;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    color: #0284c7;
-                    margin-bottom: 4px;
-                }
-
-                .org-box .name {
-                    font-size: 15px;
-                    font-weight: 600;
-                    color: #0f172a;
-                    margin-bottom: 2px;
-                }
-
-                .org-box .nip {
-                    font-size: 12px;
-                    color: #64748b;
-                }
-
-                /* Garis Penghubung Sederhana */
-                .line-down {
-                    width: 2px;
-                    height: 20px;
-                    background-color: #cbd5e1;
-                    margin: 0 auto;
-                }
-            </style>
-
             <div class="org-chart">
                 <!-- PIMPINAN UTAMA (Kepala Puskesmas) -->
                 <div class="org-level-1">
@@ -271,6 +278,17 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    </div>
+    </div>
+
+    <!-- FOOTER HALAMAN -->
+    <footer style="text-align: center; padding: 30px 0; margin-top: 40px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">
+        <div class="container">
+            <p>&copy; 2026 Puskesmas Sidorejo. Sistem Informasi Antrean Online Pasien.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
