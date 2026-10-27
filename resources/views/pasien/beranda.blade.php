@@ -568,6 +568,8 @@ body {
 }
 
 </style>
+
+
     <!-- ==========================================
        HALAMAN 1: CONTAINER BERANDA UTAMA PASIEN
        ========================================== -->
@@ -609,9 +611,9 @@ body {
                     
                     <!-- Poli Umum -->
                     <div class="poli-card"
-     data-poli="Poli Umum"
-     data-nomor="{{ $nomorTerakhir['umum'] }}"
-     data-sekarang="{{ $antreanSekarang['umum'] }}">
+                        data-poli="Poli Umum"
+                        data-nomor="{{ $nomorTerakhir['umum'] }}"
+                        data-sekarang="{{ $antreanSekarang['umum'] }}">
                         <span class="poli-icon">🏥</span>
                         <h3>Poli Umum</h3>
                         <p>Layanan kesehatan umum</p>
@@ -619,10 +621,10 @@ body {
 
                     <!-- Poli Gigi -->
                     
-<div class="poli-card"
-     data-poli="Poli Gigi"
-     data-nomor="{{ $nomorTerakhir['gigi'] }}"
-     data-sekarang="{{ $antreanSekarang['gigi'] }}">
+                    <div class="poli-card"
+                        data-poli="Poli Gigi"
+                        data-nomor="{{ $nomorTerakhir['gigi'] }}"
+                        data-sekarang="{{ $antreanSekarang['gigi'] }}">
                         <span class="poli-icon">✨</span>
                         <h3>Poli Gigi</h3>
                         <p>Layanan kesehatan gigi dan mulut</p>
@@ -632,20 +634,20 @@ body {
                         </small>
                     </div>
                     <!-- KIA / KB -->
-<!-- KIA / KB -->
-<div class="poli-card"
-     data-poli="KIA / KB"
-     data-nomor="{{ $nomorTerakhir['kia'] }}"
-     data-sekarang="{{ $antreanSekarang['kia'] }}">                        <span class="poli-icon">👶</span>
+                    <div class="poli-card"
+                        data-poli="KIA / KB"
+                        data-nomor="{{ $nomorTerakhir['kia'] }}"
+                        data-sekarang="{{ $antreanSekarang['kia'] }}">                        
+                        <span class="poli-icon">👶</span>
                         <h3>KIA / KB</h3>
                         <p>Kesehatan Ibu, anak dan KB</p>
                     </div>
 
                     <!-- Imunisasi -->
                     <div class="poli-card"
-     data-poli="Imunisasi"
-     data-nomor="{{ $nomorTerakhir['imun'] }}"
-     data-sekarang="{{ $antreanSekarang['imun'] }}">
+                        data-poli="Imunisasi"
+                        data-nomor="{{ $nomorTerakhir['imun'] }}"
+                        data-sekarang="{{ $antreanSekarang['imun'] }}">
                         <span class="poli-icon">💉</span>
                         <h3>Imunisasi</h3>
                         <p>Layanan imunisasi bayi & anak</p>
@@ -653,10 +655,9 @@ body {
 
                     <!-- Lansia -->
                     <div class="poli-card"
-     data-poli="Lansia"
-     data-nomor="{{ $nomorTerakhir['lansia'] }}"
-     data-sekarang="{{ $antreanSekarang['lansia'] }}">
-                    <div class="poli-card" data-poli="Lansia" data-nomor="{{ $nomorTerakhir['lansia'] }}" data-sekarang="{{ $antreanSekarang['lansia'] }}">
+                        data-poli="Lansia"
+                        data-nomor="{{ $nomorTerakhir['lansia'] }}"
+                        data-sekarang="{{ $antreanSekarang['lansia'] }}">
                         <span class="poli-icon">👴</span>
                         <h3>Lansia</h3>
                         <p>Layanan kesehatan lanjut usia</p>
@@ -943,7 +944,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 temp_poli: tempPoli.value,
                 status_pasien: statusPasien,
                 identitas: identitas,
-                nama_pasien: namaPasien
+                nama_pasien: namaPasien,
+                metode_pembayaran: metodeBayar
             };
 
             // Menembak route simpan pendaftaran milik Laravel Backend
