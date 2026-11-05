@@ -691,6 +691,49 @@
                     ← Kembali
                 </button>
 
+        <!-- INFORMASI FOOTER SECTION -->
+        <section class="info-section">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-badge">🕒</span>
+                        <div class="info-content">
+                            <h4>Jam Operasional</h4>
+                            <p>Senin - Jumat&#10;07.30 - 14.00 WIB</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-badge">⚠️</span>
+                        <div class="info-content">
+                            <h4>Perhatian</h4>
+                            <p>Harap datang 15 menit sebelum estimasi waktu</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-badge">📞</span>
+                        <div class="info-content">
+                            <h4>Hubungi Kami</h4>
+                            <p>(0274) 1234567&#10;puskesmassidorejo@example.id</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+    </div>
+
+    <!-- ==========================================
+   HALAMAN 2: CONTAINER STRUK TIKET ANTREAN PASIEN
+   ========================================== -->
+<div id="halaman-tiket" class="container d-none">
+    <div class="ticket-wrapper">
+        <!-- Tombol Kembali Ke Beranda -->
+        <button class="btn-back" id="btn-kembali">
+            ← Kembali
+        </button>
+>>>>>>> e84a974cd4993f7719f4b58c987e6f8acd3e2961
+
                 <!-- Card Struk Tiket Utama -->
                 <div class="ticket-card" id="ticket-to-download">
                     <div class="ticket-logo">
