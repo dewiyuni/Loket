@@ -11,10 +11,11 @@ class Antrean extends Model
     // Hubungkan ke nama tabel di database
     protected $table = 'antrean';
 
-    // Daftarkan kolom yang boleh diisi
+    // Daftarkan kolom yang boleh diisi (TERMASUK KODE_BOOKING)
     protected $fillable = [
         'pasien_id',
         'nomor_antrean',
+        'kode_booking', // 🌟 WAJIB DITAMBAHKAN DI SINI
         'poli_tujuan',
         'status'
     ];

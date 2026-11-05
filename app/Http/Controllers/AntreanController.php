@@ -5,101 +5,62 @@ namespace App\Http\Controllers;
 use App\Models\Antrean;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AntreanController extends Controller
 {
     // 1. Menampilkan Halaman Dashboard Utama Petugas
     public function index(Request $request)
     {
-        // ==============================
-        // STATISTIK HARI INI
-        // ==============================
-        $totalHariIni = Antrean::whereDate('created_at', today())
-            ->count();
+        $today = today();
 
-        $sisaMenunggu = Antrean::whereDate('created_at', today())
-            ->where('status', 'menunggu')
-            ->count();
+        $totalHariIni = Antrean::whereDate('created_at', $today)->count();
+        $sisaMenunggu = Antrean::whereDate('created_at', $today)->where('status', 'menunggu')->count();
+        $totalSelesai = Antrean::whereDate('created_at', $today)->where('status', 'selesai')->count();
 
-        $totalSelesai = Antrean::whereDate('created_at', today())
-            ->where('status', 'selesai')
-            ->count();
+        // 1. Antrean fisik (sudah diverifikasi petugas)
+        $waitingList = Antrean::with('pasien')->whereDate('created_at', $today)
+            ->where('status', 'menunggu')->orderBy('id')->get();
 
+        // 2. BOOKING ONLINE (Belum hadir / belum verifikasi)
+        $bookingList = Antrean::with('pasien')->whereDate('created_at', $today)
+            ->where('status', 'booking')->orderBy('id')->get();
 
-        // ==============================
-        // JUMLAH ANTREAN MENUNGGU PER POLI
-        // ==============================
-        $antreanHariIni = Antrean::whereDate('created_at', today())
-            ->where('status', 'menunggu')
-            ->get();
+        $skippedList = Antrean::with('pasien')->whereDate('created_at', $today)
+            ->where('status', 'dilewati')->orderByDesc('updated_at')->get();
 
-        $sisaPoli = [
-            'umum' => $antreanHariIni->where('poli_tujuan', 'Poli Umum')->count(),
-            'gigi' => $antreanHariIni->where('poli_tujuan', 'Poli Gigi')->count(),
-            'kia' => $antreanHariIni->where('poli_tujuan', 'KIA / KB')->count(),
-            'imun' => $antreanHariIni->where('poli_tujuan', 'Imunisasi')->count(),
-            'lansia' => $antreanHariIni->where('poli_tujuan', 'Lansia')->count(),
-        ];
+        $activeCallsList = Antrean::with('pasien')->whereDate('created_at', $today)
+            ->where('status', 'dipanggil')->orderByDesc('updated_at')->get();
+
+        $selesaiList = Antrean::with('pasien')->whereDate('created_at', $today)
+            ->where('status', 'selesai')->orderByDesc('updated_at')->get();
 
 
-        // ==============================
-        // SEMUA ANTREAN YANG MENUNGGU
-        // ==============================
-        // JANGAN FILTER BERDASARKAN POLI.
-        // Supaya semua pasien dari semua poli muncul.
-        $waitingList = Antrean::with('pasien')
-            ->whereDate('created_at', today())
-            ->where('status', 'menunggu')
-            ->orderBy('id', 'asc')
-            ->get();
-
-
-        // ==============================
-        // SEMUA ANTREAN YANG DILEWATI
-        // ==============================
-        $skippedList = Antrean::with('pasien')
-            ->whereDate('created_at', today())
-            ->where('status', 'dilewati')
-            ->orderBy('updated_at', 'desc')
-            ->get();
-
-
-        // ==============================
-        // SEMUA PANGGILAN AKTIF
-        // ==============================
-        // Dibutuhkan oleh 5 kartu poli
-        $activeCallsList = Antrean::with('pasien')
-            ->whereDate('created_at', today())
-            ->where('status', 'dipanggil')
-            ->orderBy('updated_at', 'desc')
-            ->get();
-
-
-        // ==============================
-        // KIRIM KE VIEW
-        // ==============================
         return view('petugas.dashboard', compact(
             'totalHariIni',
             'sisaMenunggu',
             'totalSelesai',
             'waitingList',
+            'bookingList',
             'skippedList',
             'activeCallsList',
-            'sisaPoli'
+            'selesaiList'
         ));
     }
-    // 2. API / Fungsi untuk Mengubah Status Antrean (Panggil, Selesai, Lewati)
+
+    // 2. API / Fungsi untuk Mengubah Status Antrean
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:menunggu,dipanggil,selesai,dilewati'
+            'status' => 'required|in:booking,menunggu,dipanggil,selesai,dilewati'
         ]);
 
         $antrean = Antrean::findOrFail($id);
         $antrean->status = $request->status;
         $antrean->save();
 
-        // Kembalikan respon JSON agar frontend bisa update tanpa reload halaman
         return response()->json([
             'success' => true,
             'message' => 'Status antrean berhasil diperbarui ke ' . $request->status,
@@ -107,10 +68,9 @@ class AntreanController extends Controller
         ]);
     }
 
-    // 3. Menyimpan Pendaftaran yang Diinput oleh Petugas di Ruang Pendaftaran
+    // 3. Menyimpan Pendaftaran oleh Petugas (Di Loket)
     public function storePendaftaran(Request $request)
     {
-        // 1. Validasi Input Form
         $request->validate([
             'nik' => 'required|digits:16',
             'nama_pasien' => 'required|string|max:100',
@@ -119,9 +79,8 @@ class AntreanController extends Controller
             'poli_tujuan' => 'required|string',
         ]);
 
-        // 2. Simpan atau Update Data Master Pasien
         $pasien = Pasien::updateOrCreate(
-            ['nik' => $request->nik], // Jika NIK sudah ada, update datanya. Jika belum, buat baru.
+            ['nik' => $request->nik],
             [
                 'nama_pasien' => $request->nama_pasien,
                 'tanggal_lahir' => $request->tanggal_lahir,
@@ -131,7 +90,6 @@ class AntreanController extends Controller
             ]
         );
 
-        // 3. Tentukan Kode Huruf berdasarkan Poli yang dipilih
         $poli = $request->poli_tujuan;
         $kodePoli = 'U';
         if ($poli === 'Poli Gigi')
@@ -143,30 +101,29 @@ class AntreanController extends Controller
         if ($poli === 'Lansia')
             $kodePoli = 'L';
 
-        // 4. Generate Otomatis Nomor Antrean Baru Hari Ini
         $totalPoliHariIni = Antrean::whereDate('created_at', today())->where('poli_tujuan', $poli)->count();
         $nextNumber = str_pad($totalPoliHariIni + 1, 3, '0', STR_PAD_LEFT);
         $nomorAntrean = $kodePoli . '-' . $nextNumber;
 
-        // 5. Masukkan ke Tabel Antrean
+        $kodeBooking = 'BK-' . strtoupper(Str::random(4));
+
         Antrean::create([
             'pasien_id' => $pasien->id,
             'nomor_antrean' => $nomorAntrean,
+            'kode_booking' => $kodeBooking,
             'poli_tujuan' => $poli,
-            'status' => 'menunggu'
+            'metode_pembayaran' => $request->metode_pembayaran ?? 'Umum/Mandiri',
+            'status' => 'menunggu', // ✅ FIX: Langsung masuk antrean fisik karena didaftarkan di loket
         ]);
 
-        // 6. Kembalikan ke halaman dashboard dengan pesan sukses
         return redirect()->route('petugas.dashboard')->with('success', 'Pasien berhasil didaftarkan dengan nomor ' . $nomorAntrean);
     }
 
-    // 4. Menyediakan Data Dinamis untuk Section Poli di Halaman Beranda Pasien
+    // 4. Menyediakan Data Dinamis untuk Beranda Pasien
     public function ambilAntrianIndex()
     {
-        // 1. Ambil seluruh data antrean khusus hari ini
         $antreanHariIni = Antrean::whereDate('created_at', today())->get();
 
-        // 2. Hitung total antrean per poli untuk membuat perkiraan nomor terakhir
         $totalUmum = $antreanHariIni->where('poli_tujuan', 'Poli Umum')->count();
         $totalGigi = $antreanHariIni->where('poli_tujuan', 'Poli Gigi')->count();
         $totalKia = $antreanHariIni->where('poli_tujuan', 'KIA / KB')->count();
@@ -181,7 +138,6 @@ class AntreanController extends Controller
             'lansia' => 'L-' . str_pad($totalLansia, 3, '0', STR_PAD_LEFT),
         ];
 
-        // 3. Ambil nomor antrean yang STATUSNYA saat ini sedang 'dipanggil' oleh petugas
         $sekarangUmum = $antreanHariIni->where('poli_tujuan', 'Poli Umum')->where('status', 'dipanggil')->sortByDesc('updated_at')->first();
         $sekarangGigi = $antreanHariIni->where('poli_tujuan', 'Poli Gigi')->where('status', 'dipanggil')->sortByDesc('updated_at')->first();
         $sekarangKia = $antreanHariIni->where('poli_tujuan', 'KIA / KB')->where('status', 'dipanggil')->sortByDesc('updated_at')->first();
@@ -196,76 +152,95 @@ class AntreanController extends Controller
             'lansia' => $sekarangLansia ? $sekarangLansia->nomor_antrean : 'L-000',
         ];
 
-        /* 🌟 DIUBAH DI SINI: Dialihkan ke view beranda pasien, bukan ambil-antrian lagi */
         return view('pasien.beranda', compact('nomorTerakhir', 'antreanSekarang'));
     }
 
-    // 5. Menyimpan Data dari Pop-up Modal Beranda Pasien Secara Resmi ke Database
+    // 5. Menyimpan Pendaftaran dari Pop-up Modal Beranda Pasien
     public function storePendaftaranPasien(Request $request)
     {
-        // Validasi Input dari Pop-up Modal
-        $request->validate([
-            'temp_poli' => 'required|string',
+        $validator = Validator::make($request->all(), [
+            'temp_poli' => 'required|string|in:Poli Umum,Poli Gigi,KIA / KB,Imunisasi,Lansia',
             'status_pasien' => 'required|in:lama,baru',
-            'identitas' => 'required|string|max:30', // Berisi Nomor Rekam Medis atau NIK
+            'identitas' => 'required|string|max:30',
             'nama_pasien' => 'required|string|max:100',
+            'tanggal_lahir' => 'required|date|before_or_equal:today',
+            'jenis_kelamin' => 'required|in:L,P',
+            'no_hp' => 'nullable|string|max:15',
+            'metode_pembayaran' => 'required|string|max:50',
         ]);
 
-        $poli = $request->temp_poli;
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi formulir gagal.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
-        // Tentukan Huruf Kode berdasarkan Poli
-        $kodePoli = 'U';
-        if ($poli === 'Poli Gigi')
-            $kodePoli = 'G';
-        if ($poli === 'KIA / KB')
-            $kodePoli = 'K';
-        if ($poli === 'Imunisasi')
-            $kodePoli = 'I';
-        if ($poli === 'Lansia')
-            $kodePoli = 'L';
+        try {
+            $antrean = DB::transaction(function () use ($request) {
+                $pasien = Pasien::updateOrCreate(
+                    ['nik' => $request->identitas],
+                    [
+                        'nama_pasien' => $request->nama_pasien,
+                        'tanggal_lahir' => $request->tanggal_lahir,
+                        'jenis_kelamin' => $request->jenis_kelamin,
+                        'alamat' => $request->alamat ?? '-',
+                        'no_hp' => $request->no_hp ?? '-',
+                    ]
+                );
 
-        // Simpan data master identitas pasien
-        $pasien = Pasien::updateOrCreate(
-            ['nik' => $request->identitas],
-            [
-                'nama_pasien' => $request->nama_pasien,
-                'tanggal_lahir' => now()->format('Y-m-d'), // Diisi default karena di modal tidak ada form tanggal lahir
-                'jenis_kelamin' => 'L',
-                'alamat' => '-',
-                'no_hp' => '-',
-            ]
-        );
+                $poli = $request->temp_poli;
 
-        // Hitung nomor urut antrean harian berdasarkan poli tujuan
-        $totalPoliHariIni = Antrean::whereDate('created_at', today())
-            ->where('poli_tujuan', $poli)
-            ->count();
+                $kodePoli = match ($poli) {
+                    'Poli Gigi' => 'G',
+                    'KIA / KB' => 'K',
+                    'Imunisasi' => 'I',
+                    'Lansia' => 'L',
+                    default => 'U',
+                };
 
-        $nextNumber = str_pad($totalPoliHariIni + 1, 3, '0', STR_PAD_LEFT);
-        $nomorAntreanBaru = $kodePoli . '-' . $nextNumber;
+                $totalPoliHariIni = Antrean::whereDate('created_at', today())
+                    ->where('poli_tujuan', $poli)
+                    ->lockForUpdate()
+                    ->count();
 
-        // Masukkan data ke tabel antrean
-        Antrean::create([
-            'pasien_id' => $pasien->id,
-            'nomor_antrean' => $nomorAntreanBaru,
-            'poli_tujuan' => $poli,
-            'status' => 'menunggu'
-        ]);
+                $nomorAntrean = $kodePoli . '-' . str_pad($totalPoliHariIni + 1, 3, '0', STR_PAD_LEFT);
 
-        // Kembalikan ke beranda dengan status notifikasi sukses
-        return response()->json([
-            'success' => true,
-            'nomor_baru' => $nomorAntreanBaru,
-            'poli_baru' => $poli
-        ]);
+                do {
+                    $kodeBooking = 'BK-' . strtoupper(Str::random(4));
+                } while (Antrean::where('kode_booking', $kodeBooking)->exists());
+
+                return Antrean::create([
+                    'pasien_id' => $pasien->id,
+                    'nomor_antrean' => $nomorAntrean,
+                    'kode_booking' => $kodeBooking,
+                    'poli_tujuan' => $poli,
+                    'metode_pembayaran' => $request->metode_pembayaran,
+                    'status' => 'booking', // ✅ FIX: Pasien booking online masuk ke daftar booking dulu
+                ]);
+            });
+
+            return response()->json([
+                'success' => true,
+                'nomor_baru' => $antrean->nomor_antrean,
+                'poli_baru' => $antrean->poli_tujuan,
+                'kode_booking' => $antrean->kode_booking,
+            ]);
+
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menyimpan: ' . $e->getMessage(),
+            ], 500);
+        }
     }
-    // 6. Menampilkan Halaman Cek Antrean Semua Poli (Aktif & Dilewati)
+
+    // 6. Cek Antrean Semua Poli
     public function cekAntrian()
     {
-        // Ambil data antrean khusus hari ini
         $antreanHariIni = Antrean::whereDate('created_at', today())->get();
 
-        // Daftar Poliklinik yang ada
         $daftarPoli = [
             'umum' => ['nama' => 'Poli Umum', 'kode' => 'U', 'icon' => ' 🏥'],
             'gigi' => ['nama' => 'Poli Gigi', 'kode' => 'G', 'icon' => '✨'],
@@ -277,21 +252,9 @@ class AntreanController extends Controller
         $rekapAntrean = [];
 
         foreach ($daftarPoli as $key => $poli) {
-            // 1. Cari nomor yang SAAT INI sedang dipanggil
-            $sedangDipanggil = $antreanHariIni
-                ->where('poli_tujuan', $poli['nama'])
-                ->where('status', 'dipanggil')
-                ->sortByDesc('updated_at')
-                ->first();
+            $sedangDipanggil = $antreanHariIni->where('poli_tujuan', $poli['nama'])->where('status', 'dipanggil')->sortByDesc('updated_at')->first();
+            $dilewati = $antreanHariIni->where('poli_tujuan', $poli['nama'])->where('status', 'dilewati')->pluck('nomor_antrean')->toArray();
 
-            // 2. Ambil daftar nomor antrean yang DILEWATI hari ini
-            $dilewati = $antreanHariIni
-                ->where('poli_tujuan', $poli['nama'])
-                ->where('status', 'dilewati')
-                ->pluck('nomor_antrean') // Hanya ambil nomornya saja
-                ->toArray();
-
-            // Masukkan data ke array rekap
             $rekapAntrean[$key] = [
                 'nama' => $poli['nama'],
                 'icon' => $poli['icon'],
@@ -300,13 +263,29 @@ class AntreanController extends Controller
             ];
         }
 
-        // Kirim data ke view pasien.cek-antrian
         return view('pasien.cek-antrian', compact('rekapAntrean'));
     }
-    // 7. Menampilkan Halaman Informasi / Beranda Pasien
+
     public function informasi()
     {
         return $this->ambilAntrianIndex();
     }
 
+    // 7. Fungsi Check-In Petugas berdasarkan Kode Booking QR
+    public function checkIn(Request $request)
+    {
+        $antrean = Antrean::where('kode_booking', $request->kode_booking)->first();
+
+        if ($antrean) {
+            $antrean->update(['status' => 'dipanggil']);
+            return response()->json([
+                'success' => true,
+                'message' => 'Pasien dengan kode ' . $request->kode_booking . ' berhasil check-in dan tercatat hadir!'
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Kode booking tidak ditemukan di database!'
+        ]);
+    }
 }

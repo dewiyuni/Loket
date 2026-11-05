@@ -12,14 +12,15 @@ return new class extends Migration {
     {
         Schema::create('antrean', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_booking')->unique();
             $table->foreignId('pasien_id')->constrained('pasien')->onDelete('cascade');
-            $table->string('nomor_antrean', 10);
-            $table->string('poli_tujuan', 50);
-            $table->enum('status', ['menunggu', 'dipanggil', 'selesai', 'dilewati'])->default('menunggu');
+            $table->string('poli_tujuan');
+            $table->string('nomor_antrean');
+            $table->string('metode_pembayaran')->default('Umum/Mandiri');
+            $table->enum('status', ['booking', 'menunggu', 'dipanggil', 'selesai', 'dilewati'])->default('menunggu');
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

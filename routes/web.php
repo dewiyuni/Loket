@@ -13,7 +13,9 @@ Route::get('/', function () {
 
 Route::get('/beranda', [AntreanController::class, 'ambilAntrianIndex'])->name('pasien.beranda');
 
-Route::post('/pasien/pendaftaran/simpan', [AntreanController::class, 'storePendaftaranPasien'])->name('pasien.pendaftaran.simpan');
+Route::post('/pasien/pendaftaran/simpan', [AntreanController::class, 'storePendaftaranPasien'])
+    ->name('pasien.pendaftaran.simpan');
+
 Route::get('/nomor-antrian', function () {
     return view('pasien.nomor-antrian');
 });

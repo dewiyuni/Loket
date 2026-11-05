@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Dashboard Petugas Klinik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         :root {
@@ -289,6 +290,13 @@
             display: grid;
             grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
             gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .tables-full {
+            display: grid;
+            grid-template-columns: 1fr;
+            margin-bottom: 20px;
         }
 
         .panel {
@@ -299,7 +307,9 @@
             box-shadow: 0 2px 8px rgba(15,23,42,.04);
         }
 
+        .panel-primary { border-top: 4px solid var(--primary); }
         .panel-danger { border-top: 4px solid var(--danger); }
+        .panel-success { border-top: 4px solid var(--success); }
 
         .panel-header {
             padding: 17px 18px;
@@ -319,6 +329,20 @@
             color: var(--muted);
             font-size: 11px;
             text-align: center;
+        }
+
+        /* ✨ Gaya Input Pencarian */
+        .search-input {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-size: 12px;
+            outline: none;
+            width: 200px;
+            transition: border 0.2s;
+        }
+        .search-input:focus {
+            border-color: var(--primary);
         }
 
         .table-wrap { overflow-x: auto; }
@@ -413,6 +437,8 @@
             .poli-card { min-height: 225px; padding: 13px; }
             .active-number { font-size: 28px; }
             .section-head { align-items: flex-start; flex-direction: column; gap: 4px; }
+            .search-input { width: 120px; }
+            .panel-header { flex-direction: column; align-items: flex-start; }
         }
 
         @media (max-width: 430px) {
@@ -573,17 +599,67 @@
                 @endforeach
             </div>
 
-            <!-- DAFTAR -->
-            <div class="tables">
-
-                <section class="panel">
+            <!-- TABEL BOOKING ONLINE (BELUM HADIR) -->
+            <div class="tables-full">
+                <section class="panel panel-primary">
                     <div class="panel-header">
-                        <div class="panel-title">⏳ Daftar Antrean Masuk</div>
-                        <div class="count-badge">{{ $waitingList->count() }}</div>
+                        <div class="panel-title">📱 Daftar Booking Online (Belum Hadir)</div>
+                        <div class="d-flex align-items-center gap-3">
+                            <!-- ✨ KOLOM PENCARIAN BOOKING -->
+                            <input type="text" class="search-input" placeholder="Cari nama / no..." onkeyup="filterTable(this, 'table-booking')">
+                            <div class="count-badge">{{ $bookingList->count() }}</div>
+                        </div>
                     </div>
 
                     <div class="table-wrap">
-                        <table>
+                        <table id="table-booking">
+                            <thead>
+                                <tr>
+                                    <th>No. Antrean</th>
+                                    <th>Kode Booking</th>
+                                    <th>Nama Pasien</th>
+                                    <th>Poli Tujuan</th>
+                                    <th>Aksi Petugas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($bookingList as $item)
+                                    <tr id="row-booking-{{ $item->id }}">
+                                        <td><span class="queue-number" style="color: var(--warning);">{{ $item->nomor_antrean }}</span></td>
+                                        <td><code>{{ $item->kode_booking }}</code></td>
+                                        <td>{{ $item->pasien?->nama_pasien ?? '-' }}</td>
+                                        <td>{{ $item->poli_tujuan }}</td>
+                                        <td>
+                                            <button type="button" class="mini-btn mini-call" style="background: var(--success);" onclick="verifikasiKedatangan({{ $item->id }})">✅ Verifikasi Kedatangan</button>
+                                            <button type="button" class="mini-btn mini-skip" style="background: #fee2e2; color: #b91c1c;" onclick="lewatiBooking({{ $item->id }})">⏭️ Lewati</button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="empty">Belum ada pasien booking online hari ini.</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TABEL ANTREAN FISIK & TERLEWAT -->
+            <div class="tables">
+                <!-- DAFTAR ANTREAN MASUK -->
+                <section class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title">⏳ Daftar Antrean Masuk (Fisik)</div>
+                        <div class="d-flex align-items-center gap-3">
+                            <!-- ✨ KOLOM PENCARIAN ANTREAN MASUK -->
+                            <input type="text" class="search-input" placeholder="Cari nama / no..." onkeyup="filterTable(this, 'table-masuk')" style="width: 140px;">
+                            <div class="count-badge">{{ $waitingList->count() }}</div>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table id="table-masuk">
                             <thead>
                                 <tr>
                                     <th>No. Antrean</th>
@@ -621,14 +697,19 @@
                     </div>
                 </section>
 
+                <!-- ANTREAN TERLEWAT -->
                 <section class="panel panel-danger">
                     <div class="panel-header">
                         <div class="panel-title">⚠️ Antrean Terlewat</div>
-                        <div class="count-badge">{{ $skippedList->count() }}</div>
+                        <div class="d-flex align-items-center gap-3">
+                            <!-- ✨ KOLOM PENCARIAN TERLEWAT -->
+                            <input type="text" class="search-input" placeholder="Cari no..." onkeyup="filterTable(this, 'table-terlewat')" style="width: 100px;">
+                            <div class="count-badge">{{ $skippedList->count() }}</div>
+                        </div>
                     </div>
 
                     <div class="table-wrap">
-                        <table>
+                        <table id="table-terlewat">
                             <thead>
                                 <tr>
                                     <th>No. Antrean</th>
@@ -662,16 +743,96 @@
                         </table>
                     </div>
                 </section>
-
             </div>
+
+            <!-- TABEL ANTREAN SELESAI (ACCORDION) -->
+            <div class="tables-full" style="margin-top: 10px;">
+                <div class="accordion" id="accordionSelesai">
+                    <div class="accordion-item" style="border: 1px solid var(--border); border-radius: 13px; overflow: hidden; box-shadow: 0 2px 8px rgba(15,23,42,.04);">
+                        <h2 class="accordion-header" id="headingSelesai">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSelesai" aria-expanded="false" aria-controls="collapseSelesai" style="background-color: #fff; border-top: 4px solid var(--success); color: var(--text); font-weight: 750; padding: 17px 18px; font-size: 14px;">
+                                ✅ Daftar Antrean Selesai 
+                                <span class="badge bg-success ms-2 rounded-pill">{{ $selesaiList->count() }}</span>
+                            </button>
+                        </h2>
+                        <div id="collapseSelesai" class="accordion-collapse collapse" aria-labelledby="headingSelesai" data-bs-parent="#accordionSelesai">
+                            <div class="accordion-body p-0">
+                                
+                                <!-- Header Khusus untuk Pencarian di Accordion -->
+                                <div class="p-3 border-bottom d-flex justify-content-between align-items-center bg-light">
+                                    <span class="text-muted" style="font-size: 12px;">Riwayat antrean hari ini</span>
+                                    <!-- ✨ KOLOM PENCARIAN SELESAI -->
+                                    <input type="text" class="search-input" placeholder="Cari nama / no..." onkeyup="filterTable(this, 'table-selesai')">
+                                </div>
+
+                                <div class="table-wrap">
+                                    <table id="table-selesai">
+                                        <thead>
+                                            <tr>
+                                                <th>No. Antrean</th>
+                                                <th>Nama Pasien</th>
+                                                <th>Poli Tujuan</th>
+                                                <th>Waktu Selesai</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse($selesaiList as $selesai)
+                                                <tr>
+                                                    <td>
+                                                        <span class="queue-number" style="color:var(--success)">
+                                                            {{ $selesai->nomor_antrean }}
+                                                        </span>
+                                                    </td>
+                                                    <td>{{ $selesai->pasien?->nama_pasien ?? '-' }}</td>
+                                                    <td>{{ $selesai->poli_tujuan }}</td>
+                                                    <td>{{ $selesai->updated_at->format('H:i') }} WIB</td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="4" class="empty">Belum ada antrean yang selesai dilayani hari ini.</td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </main>
 </div>
 
 <div id="toast" class="toast"></div>
 
+<!-- Bootstrap JS untuk Accordion -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    // ✨ FUNGSI PENCARIAN TABEL
+    function filterTable(inputElement, tableId) {
+        const filter = inputElement.value.toLowerCase();
+        const table = document.getElementById(tableId);
+        const rows = table.getElementsByTagName('tr');
+
+        // Mulai dari index 1 karena index 0 adalah <thead>
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            // Jika baris tersebut adalah baris "empty" (tidak ada data), lewati
+            if (row.classList.contains('empty') || row.querySelector('.empty')) continue; 
+            
+            let textValue = row.textContent || row.innerText;
+            if (textValue.toLowerCase().indexOf(filter) > -1) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
 
     function showToast(message) {
         const toast = document.getElementById('toast');
@@ -723,6 +884,36 @@
             if (typeof afterSuccess === 'function') afterSuccess(data);
             return data;
         });
+    }
+
+    // Fungsi Verifikasi: Pasien online sudah datang, masukkan ke antrean fisik
+    function verifikasiKedatangan(id) {
+        if (!confirm('Pasien sudah hadir di loket? Masukkan ke antrean fisik?')) return;
+
+        updateStatus(id, 'menunggu')
+            .then(() => {
+                showToast('Pasien berhasil diverifikasi dan masuk antrean.');
+                location.reload();
+            })
+            .catch(error => {
+                console.error(error);
+                showToast(error.message || 'Gagal memverifikasi pasien.');
+            });
+    }
+
+    // Fungsi Lewati: Pasien online tidak datang / hangus
+    function lewatiBooking(id) {
+        if (!confirm('Tandai pasien ini tidak hadir (lewati)?')) return;
+
+        updateStatus(id, 'dilewati')
+            .then(() => {
+                showToast('Booking pasien dilewati.');
+                location.reload();
+            })
+            .catch(error => {
+                console.error(error);
+                showToast(error.message || 'Gagal melewati booking.');
+            });
     }
 
     // Memanggil antrean baru dari waiting list.
@@ -824,52 +1015,7 @@
             localStorage.removeItem('pemicuSuara');
             console.error('Data suara tidak valid:', error);
         }
-    }
-// function putarNadaPerhatian() {
-//     return new Promise((resolve) => {
-//         // Membuat konteks audio dari browser
-//         const AudioContext = window.AudioContext || window.webkitAudioContext;
-//         const ctx = new AudioContext();
-
-//         // Nada Pertama (Ding)
-//         const osc1 = ctx.createOscillator();
-//         const gain1 = ctx.createGain();
-//         osc1.type = 'sine';
-//         osc1.frequency.setValueAtTime(587.33, ctx.currentTime); // Kunci D5
-//         gain1.gain.setValueAtTime(0.3, ctx.currentTime);
-//         gain1.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-        
-//         osc1.connect(gain1);
-//         gain1.connect(ctx.destination);
-        
-//         osc1.start(ctx.currentTime);
-//         osc1.stop(ctx.currentTime + 0.4);
-
-//         // Nada Kedua (Dong) - berbunyi setelah jeda 0.25 detik
-//         setTimeout(() => {
-//             const osc2 = ctx.createOscillator();
-//             const gain2 = ctx.createGain();
-//             osc2.type = 'sine';
-//             osc2.frequency.setValueAtTime(440.00, ctx.currentTime); // Kunci A4
-//             gain2.gain.setValueAtTime(0.3, ctx.currentTime);
-//             gain2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-            
-//             osc2.connect(gain2);
-//             gain2.connect(ctx.destination);
-            
-//             osc2.start(ctx.currentTime);
-//             osc2.stop(ctx.currentTime + 0.5);
-            
-//             // Berikan jeda sedikit setelah nada selesai sebelum mengizinkan suara teks masuk
-//             setTimeout(() => {
-//                 resolve();
-//             }, 600); 
-//         }, 250);
-//     });
-// }
- 
-);
-    
+    });
 </script>
 </body>
 </html>
