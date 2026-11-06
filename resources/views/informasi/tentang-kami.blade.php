@@ -1,3 +1,9 @@
+@extends('layouts.app')
+
+@section('title', 'Beranda - Puskesmas Sejahtera')
+
+@section('content')
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -283,12 +289,6 @@
     </div>
     </div>
 
-    <!-- FOOTER HALAMAN -->
-    <footer style="text-align: center; padding: 30px 0; margin-top: 40px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 13px;">
-        <div class="container">
-            <p>&copy; 2026 Puskesmas Sidorejo. Sistem Informasi Antrean Online Pasien.</p>
-        </div>
-    </footer>
-
 </body>
 </html>
+@endsection

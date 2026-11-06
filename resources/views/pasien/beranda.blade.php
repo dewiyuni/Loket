@@ -46,9 +46,7 @@
         gap: 40px;
     }
 
-    .hero-text { 
-        flex: 1; 
-    }
+    .hero-text { flex: 1; }
 
     .hero-text h1 {
         font-size: 2.8rem;
@@ -59,9 +57,7 @@
         color: #0f172a;
     }
 
-    .hero-text h1 span { 
-        color: #00875a; 
-    }
+    .hero-text h1 span { color: #00875a; }
 
     .hero-text p {
         color: #64748b;
@@ -92,22 +88,13 @@
         box-shadow: 0 12px 28px rgba(0, 135, 90, 0.3);
     }
 
-    .hero-image { 
-        flex: 1; 
-        text-align: right; 
-    }
-
-    .hero-image svg { 
-        max-width: 100%; 
-        height: auto; 
-    }
+    .hero-image { flex: 1; text-align: right; }
+    .hero-image svg { max-width: 100%; height: auto; }
 
     /* ==========================================
     3. PILIH POLI TUJUAN (GRID CARDS)
     ========================================== */
-    .poli-section { 
-        padding: 70px 0; scroll-behavior: smooth; 
-    }
+    .poli-section { padding: 70px 0; }
 
     .section-title { 
         font-size: 1.6rem; 
@@ -141,11 +128,7 @@
         background-color: #fcfdfd;
     }
 
-    .poli-icon { 
-        font-size: 2.5rem; 
-        margin-bottom: 16px; 
-        display: block; 
-    }
+    .poli-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
 
     .poli-card h3 { 
         font-size: 1.15rem; 
@@ -164,37 +147,21 @@
     4. RESPONSIVE BREAKPOINTS (HP & TABLET)
     ========================================== */
     @media (max-width: 1200px) {
-        .poli-grid { 
-            grid-template-columns: repeat(3, 1fr); 
-        }
+        .poli-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (max-width: 992px) {
-        .hero-grid { 
-            flex-direction: column; 
-            text-align: center;
-            gap: 30px;
-        }
-        .hero-image { 
-            text-align: center; 
-        }
-        .hero-text h1 { 
-            font-size: 2.2rem; 
-        }
+        .hero-grid { flex-direction: column; text-align: center; gap: 30px; }
+        .hero-image { text-align: center; }
+        .hero-text h1 { font-size: 2.2rem; }
     }
 
     @media (max-width: 640px) {
-        .poli-grid { 
-            grid-template-columns: repeat(1, 1fr); 
-            gap: 16px;
-        }
-        .hero-section {
-            padding: 40px 0;
-        }
-        .poli-section {
-            padding: 40px 0;scroll-behavior: smooth; 
-        }
+        .poli-grid { grid-template-columns: repeat(1, 1fr); gap: 16px; }
+        .hero-section { padding: 40px 0; }
+        .poli-section { padding: 40px 0; }
     }
+
     /* ==========================================
     5. INFORMASI FOOTER SECTION (HALAMAN 1)
     ========================================== */
@@ -210,16 +177,9 @@
         gap: 40px; 
     }
 
-    .info-item { 
-        display: flex; 
-        gap: 20px; 
-        align-items: flex-start;
-    }
+    .info-item { display: flex; gap: 20px; align-items: flex-start; }
 
-    .info-badge { 
-        font-size: 2.2rem; 
-        line-height: 1;
-    }
+    .info-badge { font-size: 2.2rem; line-height: 1; }
 
     .info-content h4 { 
         font-size: 1.1rem; 
@@ -243,7 +203,6 @@
         margin: 40px auto;
     }
 
-    /* Tombol Kembali */
     .btn-back {
         background: none;
         border: none;
@@ -258,11 +217,8 @@
         transition: color 0.2s ease;
     }
 
-    .btn-back:hover { 
-        color: #0f172a; 
-    }
+    .btn-back:hover { color: #0f172a; }
 
-    /* Card Struk */
     .ticket-card {
         background-color: #ffffff;
         border-radius: 24px;
@@ -321,8 +277,6 @@
         margin-bottom: 35px; 
     }
 
-    /* Grid Rincian Box di Struk */
-    /* Container Utama Grid Atas (2 Kolom) */
     .ticket-meta-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -331,7 +285,6 @@
         width: 100%;
     }
 
-    /* Container Utama Grid Bawah (Spesial Lebar Penuh & Menonjol) */
     .ticket-meta-grid2 {
         display: grid;
         grid-template-columns: 1fr;
@@ -339,7 +292,6 @@
         width: 100%;
     }
 
-    /* Base Style untuk Kotak Informasi */
     .meta-box {
         background-color: #f8fafc;
         border-radius: 12px;
@@ -352,23 +304,16 @@
         transition: all 0.2s ease;
     }
 
-    /* ✨ Desain Khusus untuk Kotak Antrean Saat Ini (Grid2) */
     .ticket-meta-grid2 .meta-box {
-        background-color: #f0fdf4; /* Latar belakang hijau sangat muda */
-        border: 2px dashed #22c55e; /* Border putus-putus hijau */
-        padding: 20px; /* Lebih luas */
-        justify-content: center; /* Konten di dalam kotak otomatis rata tengah */
+        background-color: #f0fdf4;
+        border: 2px dashed #22c55e;
+        padding: 20px;
+        justify-content: center;
         text-align: center;
     }
 
-    /* Pengaturan Ikon */
-    .meta-icon { 
-        font-size: 1.5rem; 
-        display: flex;
-        align-items: center;
-    }
+    .meta-icon { font-size: 1.5rem; display: flex; align-items: center; }
 
-    /* Label Teks Kecil */
     .meta-label { 
         font-size: 0.75rem; 
         color: #64748b; 
@@ -377,90 +322,26 @@
         margin-bottom: 4px;
     }
 
-    /* Nilai Teks Utama */
     .meta-value { 
         font-size: 0.95rem; 
         font-weight: 700; 
         color: #0f172a; 
     }
 
-    /* ✨ Efek Spesial Huruf Kapital Besar Hijau di Grid2 */
     .ticket-meta-grid2 .meta-label {
-        color: #15803d; /* Warna label hijau gelap agar terbaca */
+        color: #15803d;
         font-size: 0.85rem;
         letter-spacing: 0.5px;
     }
 
     .ticket-meta-grid2 .meta-value {
-        font-size: 1.75rem; /* Ukuran font dibuat jauh lebih besar */
-        color: #16a34a; /* Warna font hijau cerah */
-        text-transform: uppercase; /* Otomatis Kapital */
+        font-size: 1.75rem;
+        color: #16a34a;
+        text-transform: uppercase;
         display: block;
         margin-top: 4px;
     }
 
-    /* ✨ Bonus: Desain Kotak Perhatian & Tombol bawah */
-    .notice-box {
-        background-color: #fffbeb;
-        border: 1px solid #fef3c7;
-        border-radius: 12px;
-        padding: 16px;
-        margin-top: 16px;
-    }
-
-    .notice-text h5 {
-        color: #b45309;
-        margin: 0 0 4px 0;
-        font-size: 0.95rem;
-        font-weight: 700;
-    }
-
-    .notice-text p {
-        color: #78350f;
-        margin: 0;
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-
-    .btn-status-view {
-        width: 100%;
-        background-color: #2563eb;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 12px;
-        font-weight: 600;
-        font-size: 0.9rem;
-        margin-top: 14px;
-        cursor: pointer;
-        transition: background 0.2s;
-    }
-
-    .btn-status-view:hover {
-        background-color: #1d4ed8;
-    }
-
-    /* Pewarnaan Khusus Box Estimasi Hijau */
-    .status-box {
-        background-color: #f0fdf4;
-        border-color: #bbf7d0;
-    }
-
-    .meta-label-green {
-        font-size: 0.75rem;
-        color: #166534;
-        font-weight: 600;
-        display: block;
-        margin-bottom: 2px;
-    }
-
-    .meta-value-green {
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: #15803d;
-    }
-
-    /* Box Catatan Peringatan Kuning Bawah */
     .notice-box {
         background-color: #fffbeb;
         border: 1px solid #fef3c7;
@@ -487,27 +368,6 @@
         line-height: 1.4;
     }
 
-    .btn-status-view {
-        background-color: #00875a;
-        color: white;
-        border: none;
-        padding: 12px 18px;
-        border-radius: 10px;
-        font-size: 0.85rem;
-        font-weight: 700;
-        cursor: pointer;
-        white-space: nowrap;
-        transition: background-color 0.2s;
-        box-shadow: 0 4px 10px rgba(0, 135, 90, 0.15);
-    }
-
-    .btn-status-view:hover {
-        background-color: #006644;
-    }
-
-    /* ==========================================
-    7. RESPONSIF LANJUTAN (HP / LAYAR KECIL)
-    ========================================== */
     @media (max-width: 768px) {
         .info-grid, .ticket-meta-grid { 
             grid-template-columns: 1fr; 
@@ -520,16 +380,10 @@
         .notice-text {
             text-align: center;
         }
-        .btn-status-view {
-            width: 100%;
-        }
-        .ticket-card {
-            padding: 24px 16px;
-        }
-        .ticket-number {
-            font-size: 3.5rem;
-        }
+        .ticket-card { padding: 24px 16px; }
+        .ticket-number { font-size: 3.5rem; }
     }
+
     /* Gaya Pop-up Modal Tengah */
     .modal-overlay {
         position: fixed;
@@ -540,28 +394,22 @@
         padding: 20px;
         box-sizing: border-box;
     }
-        .modal-content {
+    
+    .modal-content {
         background: #ffffff;
         width: 100%; 
         max-width: 450px;
         border-radius: 12px;
-        /* ✨ PERBAIKAN: Tambahkan padding dan batasi tinggi */
         padding: 24px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         animation: popIn 0.3s ease;
-        
-        max-height: 90vh; /* Maksimal 90% dari tinggi layar */
-        overflow-y: auto; /* Bisa di-scroll jika formnya panjang */
+        max-height: 90vh; 
+        overflow-y: auto; 
     }
 
-    /* ✨ PERBAIKAN: Agar scrollbar terlihat rapi di HP */
-    .modal-content::-webkit-scrollbar {
-        width: 6px;
-    }
-    .modal-content::-webkit-scrollbar-thumb {
-        background-color: #cbd5e1;
-        border-radius: 10px;
-    }
+    .modal-content::-webkit-scrollbar { width: 6px; }
+    .modal-content::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
+    
     .modal-header {
         display: flex; justify-content: space-between; align-items: center;
         margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;
@@ -580,250 +428,196 @@
         from { transform: scale(0.8); opacity: 0; }
         to { transform: scale(1); opacity: 1; }
     }
-
 </style>
 
-
-    <!-- ===============================================================================================================================================
-       HALAMAN 1: CONTAINER BERANDA UTAMA PASIEN
-       ================================================================================================================================================= -->
-    <div id="halaman-beranda">
-        <!-- HERO BANNER SECTION -->
-        <section class="hero-section">
-            <div class="container">
-                <div class="hero-grid">
-                    <div class="hero-text">
-                        <h1>Layanan Antrean<br><span>Puskesmas Sejahtera</span></h1>
-                        <p>Dapatkan nomor antrean secara online lebih mudah, cepat, dan nyaman.</p>
-                        
-                        <!-- Tombol Ambil Antrean Cepat -->
-                        <button class="btn-success" id="btn-ambil-cepat">
-                            🎟️ Ambil Nomor Antrean
-                        </button>
-                    </div>
-                    <div class="hero-image">
-                        <!-- Ilustrasi Gedung Puskesmas SVG -->
-                        <svg width="450" height="280" viewBox="0 0 450 280" fill="none" xmlns="http://w3.org">
-                            <rect width="450" height="280" rx="16" fill="#E6F4EA"/>
-                            <rect x="100" y="80" width="250" height="200" fill="#FFFFFF" rx="8"/>
-                            <rect x="130" y="40" width="190" height="40" fill="#00875a" rx="4"/>
-                            <path d="M225 48V72M213 60H237" stroke="white" stroke-width="4" stroke-linecap="round"/>
-                            <rect x="140" y="120" width="50" height="50" fill="#E8EAED" rx="4"/>
-                            <rect x="260" y="120" width="50" height="50" fill="#E8EAED" rx="4"/>
-                            <rect x="205" y="200" width="40" height="80" fill="#34A853" rx="2"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PILIH POLI TUJUAN SECTION -->
-        <section id="poli-section" class="poli-section">
-            <div class="container">
-                <h2 class="section-title">Pilih Poli Tujuan</h2>
-                <div class="poli-grid">
-                    
-                    <!-- Poli Umum -->
-                    <div class="poli-card"
-                        data-poli="Poli Umum"
-                        data-nomor="{{ $nomorTerakhir['umum'] }}"
-                        data-sekarang="{{ $antreanSekarang['umum'] }}">
-                        <span class="poli-icon">🏥</span>
-                        <h3>Poli Umum</h3>
-                        <p>Layanan kesehatan umum</p>
-                    </div>
-
-                    <!-- Poli Gigi -->
-                    
-                    <div class="poli-card"
-                        data-poli="Poli Gigi"
-                        data-nomor="{{ $nomorTerakhir['gigi'] }}"
-                        data-sekarang="{{ $antreanSekarang['gigi'] }}">
-                        <span class="poli-icon">✨</span>
-                        <h3>Poli Gigi</h3>
-                        <p>Layanan kesehatan gigi dan mulut</p>
-                        <!-- Menampilkan teks pendukung di bawah kartu -->
-                    </div>
-                    <!-- KIA / KB -->
-                    <div class="poli-card"
-                        data-poli="KIA / KB"
-                        data-nomor="{{ $nomorTerakhir['kia'] }}"
-                        data-sekarang="{{ $antreanSekarang['kia'] }}">                        
-                        <span class="poli-icon">👶</span>
-                        <h3>KIA / KB</h3>
-                        <p>Kesehatan Ibu, anak dan KB</p>
-                    </div>
-
-                    <!-- Imunisasi -->
-                    <div class="poli-card"
-                        data-poli="Imunisasi"
-                        data-nomor="{{ $nomorTerakhir['imun'] }}"
-                        data-sekarang="{{ $antreanSekarang['imun'] }}">
-                        <span class="poli-icon">💉</span>
-                        <h3>Imunisasi</h3>
-                        <p>Layanan imunisasi bayi & anak</p>
-                    </div>
-
-                    <!-- Lansia -->
-                    <div class="poli-card"
-                        data-poli="Lansia"
-                        data-nomor="{{ $nomorTerakhir['lansia'] }}"
-                        data-sekarang="{{ $antreanSekarang['lansia'] }}">
-                        <span class="poli-icon">👴</span>
-                        <h3>Lansia</h3>
-                        <p>Layanan kesehatan lanjut usia</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    </div>
-
- <!-- =======================================================================================================================================
-            HALAMAN 2: CONTAINER STRUK TIKET ANTREAN PASIEN
-     ======================================================================================================================================== -->
-    <div id="halaman-tiket" class="d-none">
+<!-- ==========================================
+     HALAMAN 1: CONTAINER BERANDA UTAMA PASIEN
+     ========================================== -->
+<div id="halaman-beranda">
+    <!-- HERO BANNER SECTION -->
+    <section class="hero-section">
         <div class="container">
-            <div class="ticket-wrapper" style="max-width: 600px; margin: 30px auto;">
-                
-                <!-- Tombol Kembali Ke Beranda -->
-                <button class="btn-back" id="btn-kembali" style="margin-bottom: 15px;">
-                    ← Kembali
-                </button>
-
-        <!-- INFORMASI FOOTER SECTION -->
-        <section class="info-section">
-            <div class="container">
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-badge">🕒</span>
-                        <div class="info-content">
-                            <h4>Jam Operasional</h4>
-                            <p>Senin - Jumat&#10;07.30 - 14.00 WIB</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-badge">⚠️</span>
-                        <div class="info-content">
-                            <h4>Perhatian</h4>
-                            <p>Harap datang 15 menit sebelum estimasi waktu</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-badge">📞</span>
-                        <div class="info-content">
-                            <h4>Hubungi Kami</h4>
-                            <p>(0274) 1234567&#10;puskesmassidorejo@example.id</p>
-                        </div>
-                    </div>
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h1>Layanan Antrean<br><span>Puskesmas Sejahtera</span></h1>
+                    <p>Dapatkan nomor antrean secara online lebih mudah, cepat, dan nyaman.</p>
+                    
+                    <button class="btn-success" id="btn-ambil-cepat">
+                        🎟️ Ambil Nomor Antrean
+                    </button>
+                </div>
+                <div class="hero-image">
+                    <svg width="450" height="280" viewBox="0 0 450 280" fill="none" xmlns="http://w3.org">
+                        <rect width="450" height="280" rx="16" fill="#E6F4EA"/>
+                        <rect x="100" y="80" width="250" height="200" fill="#FFFFFF" rx="8"/>
+                        <rect x="130" y="40" width="190" height="40" fill="#00875a" rx="4"/>
+                        <path d="M225 48V72M213 60H237" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                        <rect x="140" y="120" width="50" height="50" fill="#E8EAED" rx="4"/>
+                        <rect x="260" y="120" width="50" height="50" fill="#E8EAED" rx="4"/>
+                        <rect x="205" y="200" width="40" height="80" fill="#34A853" rx="2"/>
+                    </svg>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        
-    </div>
+    <!-- PILIH POLI TUJUAN SECTION -->
+    <section id="poli-section" class="poli-section">
+        <div class="container">
+            <h2 class="section-title">Pilih Poli Tujuan</h2>
+            <div class="poli-grid">
+                
+                <!-- Poli Umum -->
+                <div class="poli-card"
+                    data-poli="Poli Umum"
+                    data-nomor="{{ $nomorTerakhir['umum'] }}"
+                    data-sekarang="{{ $antreanSekarang['umum'] }}">
+                    <span class="poli-icon">🏥</span>
+                    <h3>Poli Umum</h3>
+                    <p>Layanan kesehatan umum</p>
+                </div>
 
-    <!-- ==========================================
-   HALAMAN 2: CONTAINER STRUK TIKET ANTREAN PASIEN
-   ========================================== -->
+                <!-- Poli Gigi -->
+                <div class="poli-card"
+                    data-poli="Poli Gigi"
+                    data-nomor="{{ $nomorTerakhir['gigi'] }}"
+                    data-sekarang="{{ $antreanSekarang['gigi'] }}">
+                    <span class="poli-icon">✨</span>
+                    <h3>Poli Gigi</h3>
+                    <p>Layanan kesehatan gigi dan mulut</p>
+                </div>
+                
+                <!-- KIA / KB -->
+                <div class="poli-card"
+                    data-poli="KIA / KB"
+                    data-nomor="{{ $nomorTerakhir['kia'] }}"
+                    data-sekarang="{{ $antreanSekarang['kia'] }}">                        
+                    <span class="poli-icon">👶</span>
+                    <h3>KIA / KB</h3>
+                    <p>Kesehatan Ibu, anak dan KB</p>
+                </div>
+
+                <!-- Imunisasi -->
+                <div class="poli-card"
+                    data-poli="Imunisasi"
+                    data-nomor="{{ $nomorTerakhir['imun'] }}"
+                    data-sekarang="{{ $antreanSekarang['imun'] }}">
+                    <span class="poli-icon">💉</span>
+                    <h3>Imunisasi</h3>
+                    <p>Layanan imunisasi bayi & anak</p>
+                </div>
+
+                <!-- Lansia -->
+                <div class="poli-card"
+                    data-poli="Lansia"
+                    data-nomor="{{ $nomorTerakhir['lansia'] }}"
+                    data-sekarang="{{ $antreanSekarang['lansia'] }}">
+                    <span class="poli-icon">👴</span>
+                    <h3>Lansia</h3>
+                    <p>Layanan kesehatan lanjut usia</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==========================================
+     HALAMAN 2: CONTAINER STRUK TIKET ANTREAN PASIEN
+     ========================================== -->
 <div id="halaman-tiket" class="container d-none">
     <div class="ticket-wrapper">
         <!-- Tombol Kembali Ke Beranda -->
         <button class="btn-back" id="btn-kembali">
             ← Kembali
         </button>
->>>>>>> e84a974cd4993f7719f4b58c987e6f8acd3e2961
 
-                <!-- Card Struk Tiket Utama -->
-                <div class="ticket-card" id="ticket-to-download">
-                    <div class="ticket-logo">
-                        <div class="icon">✚</div>
-                        <span>PUSKESMAS SEJAHTERA</span>
+        <!-- Card Struk Tiket Utama -->
+        <div class="ticket-card" id="ticket-to-download">
+            <div class="ticket-logo">
+                <div class="icon">✚</div>
+                <span>PUSKESMAS SEJAHTERA</span>
+            </div>
+            
+            <p class="ticket-title">Nomor Antrean Anda</p>
+            <div class="ticket-number" id="txt-nomor-antrean">U-000</div>
+            <p class="ticket-thanks">Terima kasih, nomor antrean Anda telah berhasil dibuat</p>
+
+            <!-- KODE BOOKING & QR CODE -->
+            <div class="booking-code-box" style="background: #f8f9fa; border: 2px dashed #0d6efd; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center;">
+                <span style="font-size: 0.85rem; color: #555; display: block; margin-bottom: 5px;">Kode Booking & QR Check-in:</span>
+                
+                <div id="qrcode-container" style="display: flex; justify-content: center; margin-bottom: 8px;"></div>
+                
+                <strong id="txt-kode-booking" style="font-size: 1.2rem; letter-spacing: 2px; color: #0d6efd;">-</strong>
+            </div>
+
+            <!-- DATA IDENTITAS PASIEN -->
+            <div class="ticket-meta-grid" style="border-bottom: 1px dashed #ccc; padding-bottom: 10px; margin-bottom: 10px; display: flex; justify-content: space-between;">
+                <div class="meta-box">
+                    <span class="meta-icon">👤</span>
+                    <div>
+                        <span class="meta-label">Nama Pasien</span>
+                        <span class="meta-value" id="txt-nama-pasien">-</span>
                     </div>
-                    
-                    <p class="ticket-title">Nomor Antrean Anda</p>
-                    <div class="ticket-number" id="txt-nomor-antrean">U-000</div>
-                    <p class="ticket-thanks">Terima kasih, nomor antrean Anda telah berhasil dibuat</p>
-
-                    <!-- KODE BOOKING & QR CODE -->
-                    <div class="booking-code-box" style="background: #f8f9fa; border: 2px dashed #0d6efd; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center;">
-                        <span style="font-size: 0.85rem; color: #555; display: block; margin-bottom: 5px;">Kode Booking & QR Check-in:</span>
-                        
-                        <!-- Penampung QR Code -->
-                        <div id="qrcode-container" style="display: flex; justify-content: center; margin-bottom: 8px;"></div>
-                        
-                        <!-- Teks Kode Booking -->
-                        <strong id="txt-kode-booking" style="font-size: 1.2rem; letter-spacing: 2px; color: #0d6efd;">-</strong>
+                </div>
+                <div class="meta-box">
+                    <span class="meta-icon">💳</span>
+                    <div>
+                        <span class="meta-label">Metode Bayar</span>
+                        <span class="meta-value" id="txt-penjaminan-pasien">-</span>
                     </div>
-
-                    <!-- DATA IDENTITAS PASIEN -->
-                    <div class="ticket-meta-grid" style="border-bottom: 1px dashed #ccc; padding-bottom: 10px; margin-bottom: 10px; display: flex; justify-content: space-between;">
-                        <div class="meta-box">
-                            <span class="meta-icon">👤</span>
-                            <div>
-                                <span class="meta-label">Nama Pasien</span>
-                                <span class="meta-value" id="txt-nama-pasien">-</span>
-                            </div>
-                        </div>
-                        <div class="meta-box">
-                            <span class="meta-icon">💳</span>
-                            <div>
-                                <span class="meta-label">Metode Bayar</span>
-                                <span class="meta-value" id="txt-penjaminan-pasien">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Detail Info Box Grid -->
-                    <div class="ticket-meta-grid" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                        <div class="meta-box">
-                            <span class="meta-icon">📋</span>
-                            <div>
-                                <span class="meta-label">Poli Tujuan</span>
-                                <span class="meta-value" id="txt-poli-tujuan">Poli Umum</span>
-                            </div>
-                        </div>
-                        <div class="meta-box">
-                            <span class="meta-icon">🕒</span>
-                            <div>
-                                <span class="meta-label">Waktu Dibuat</span>
-                                <span class="meta-value" id="txt-jam-dibuat">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Info Antrean Berjalan & Estimasi -->
-                    <div class="ticket-meta-grid2" style="margin-bottom: 15px;">
-                        <div class="meta-box">
-                            <div>
-                                <span class="meta-label">⏳ Antrean Saat Ini</span>
-                                <span class="meta-value" id="txt-antrean-sekarang">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="notice-box" style="background: #fff3cd; padding: 12px; border-radius: 8px; border: 1px solid #ffeeba;">
-                        <div class="notice-text">
-                            <h5 style="margin: 0 0 5px 0; color: #856404;">⚠️ Petunjuk Kedatangan</h5>
-                            <p style="margin: 0; font-size: 0.9rem; color: #856404;">Saat tiba di Puskesmas, <strong>langsung menuju ke Ruang Tunggu Poli Tujuan</strong> dan tunjukkan/scan Kode Booking di atas. Tidak perlu mengantre lagi di loket pendaftaran.</p>
-                        </div>
-                    </div>
-
-                    <!-- ✨ TOMBOL DOWNLOAD GAMBAR ✨ -->
-                    <button type="button" id="btn-download-tiket" class="btn-download" style="width: 100%; margin-top: 20px; background-color: #00875a; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; display: flex; justify-content: center; align-items: center; gap: 8px;">
-                        📥 Simpan Tiket ke Galeri
-                    </button>
-
-                    <!-- 🌟 TOMBOL BARU: SELESAI & KEMBALI -->
-                    <button type="button" id="btn-selesai-tiket" style="width: 100%; margin-top: 10px; background-color: #e2e8f0; color: #475569; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.2s;">
-                        ✅ Selesai & Kembali
-                    </button>
-
                 </div>
             </div>
+
+            <!-- Detail Info Box Grid -->
+            <div class="ticket-meta-grid" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <div class="meta-box">
+                    <span class="meta-icon">📋</span>
+                    <div>
+                        <span class="meta-label">Poli Tujuan</span>
+                        <span class="meta-value" id="txt-poli-tujuan">Poli Umum</span>
+                    </div>
+                </div>
+                <div class="meta-box">
+                    <span class="meta-icon">🕒</span>
+                    <div>
+                        <span class="meta-label">Waktu Dibuat</span>
+                        <span class="meta-value" id="txt-jam-dibuat">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Antrean Berjalan & Estimasi -->
+            <div class="ticket-meta-grid2" style="margin-bottom: 15px;">
+                <div class="meta-box">
+                    <div>
+                        <span class="meta-label">⏳ Antrean Saat Ini</span>
+                        <span class="meta-value" id="txt-antrean-sekarang">-</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="notice-box" style="background: #fff3cd; padding: 12px; border-radius: 8px; border: 1px solid #ffeeba;">
+                <div class="notice-text">
+                    <h5 style="margin: 0 0 5px 0; color: #856404;">⚠️ Petunjuk Kedatangan</h5>
+                    <p style="margin: 0; font-size: 0.9rem; color: #856404;">Saat tiba di Puskesmas, <strong>langsung menuju ke Ruang Tunggu Poli Tujuan</strong> dan tunjukkan/scan Kode Booking di atas. Tidak perlu mengantre lagi di loket pendaftaran.</p>
+                </div>
+            </div>
+
+            <!-- TOMBOL DOWNLOAD GAMBAR -->
+            <button type="button" id="btn-download-tiket" class="btn-download" style="width: 100%; margin-top: 20px; background-color: #00875a; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; display: flex; justify-content: center; align-items: center; gap: 8px;">
+                📥 Simpan Tiket ke Galeri
+            </button>
+
+            <!-- TOMBOL SELESAI & KEMBALI -->
+            <button type="button" id="btn-selesai-tiket" style="width: 100%; margin-top: 10px; background-color: #e2e8f0; color: #475569; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.2s;">
+                ✅ Selesai & Kembali
+            </button>
+
         </div>
     </div>
-
+</div>
 
 <!-- ==========================================
     POP-UP FORMULIR PENDAFTARAN (MODAL DI TENGAH)
@@ -910,6 +704,7 @@
         </form>
     </div>
 </div>
+
 <!-- Load Library QR Code Terlebih Dahulu -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
@@ -1119,7 +914,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-      // =========================================================================
+    // =========================================================================
     // 4. LOGIKA PEMBLOKIRAN TOMBOL KEMBALI & MENU NAVIGASI
     // =========================================================================
     function cekIzinKeluar(e) {
@@ -1134,16 +929,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const tombolKembali = document.getElementById("btn-kembali");
     
-    // Cari semua link menu di navbar (biasanya ada di dalam tag <nav> atau <header>)
-    // Kita ambil semua tag <a> yang ada di halaman
+    // Cari semua link menu di navbar
     const semuaLinkMenu = document.querySelectorAll('a'); 
 
     function kembaliKeBeranda(e) {
         if (e) e.preventDefault();
         
-        // Cek apakah boleh keluar
         if (cekIzinKeluar(e)) {
-            isTiketSaved = true; // Bypass peringatan
+            isTiketSaved = true; 
             if (halamanTiket && halamanBeranda) {
                 halamanTiket.classList.add("d-none");
                 halamanBeranda.classList.remove("d-none");
@@ -1153,12 +946,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (tombolKembali) tombolKembali.addEventListener("click", kembaliKeBeranda);
 
-    // 🌟 PASANG PENGAMAN DI SEMUA MENU NAVBAR
+    // PASANG PENGAMAN DI SEMUA MENU NAVBAR
     semuaLinkMenu.forEach(link => {
-        // Kita blokir semua link <a> saat di halaman tiket
         link.addEventListener("click", function(e) {
             if (isHalamanTiketAktif && !isTiketSaved) {
-                e.preventDefault(); // Jangan pindah halaman
+                e.preventDefault(); 
                 alert("⚠️ Anda harus mengunduh tiket terlebih dahulu sebelum membuka menu lain!");
             }
         });
@@ -1177,6 +969,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
     if (halamanTiket) observerHalaman.observe(halamanTiket, { attributes: true });
+
     // =========================================================================
     // 5. LOGIKA TOMBOL DOWNLOAD GAMBAR
     // =========================================================================
